@@ -1,0 +1,70 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [main, "phase/*"]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality-gate:
+    name: Code Quality & Build Checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.9
+
+      - name: Setup Node.js (LTS 22)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "pnpm"
+
+      - name: Install Monorepo Dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Check Formatting (Prettier)
+        run: pnpm format:check
+
+      - name: Static Analysis & Linting (ESLint)
+        run: pnpm lint
+
+      - name: Type Verification (TypeScript Strict)
+        run: pnpm typecheck
+
+      - name: Build Web Application
+        run: pnpm build
+        env:
+          NODE_ENV: production
+          NEXT_PUBLIC_APP_URL: https://softcapphyjas.com
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/softcapphyjas
+          AUTH_SECRET: ci_pipeline_super_secret_key_32_bytes_min_length
+          AUTH_GOOGLE_ID: placeholder_google_id
+          AUTH_GOOGLE_SECRET: placeholder_google_secret
+          AUTH_GITHUB_ID: placeholder_github_id
+          AUTH_GITHUB_SECRET: placeholder_github_secret
+          RAZORPAY_KEY_ID: rzp_test_placeholder
+          RAZORPAY_KEY_SECRET: placeholder_secret
+          RAZORPAY_WEBHOOK_SECRET: placeholder_webhook
+          NEXT_PUBLIC_RAZORPAY_KEY_ID: rzp_test_placeholder
+          MUX_TOKEN_ID: placeholder_token
+          MUX_TOKEN_SECRET: placeholder_secret
+          MUX_SIGNING_KEY_ID: placeholder_key_id
+          MUX_SIGNING_PRIVATE_KEY: placeholder_private_key
+          RESEND_API_KEY: placeholder_resend
+          GROQ_API_KEY: placeholder_groq
+          GEMINI_API_KEY: placeholder_gemini
+          TURNSTILE_SITE_KEY: placeholder_turnstile_site
+          TURNSTILE_SECRET_KEY: placeholder_turnstile_secret
+          SENTRY_DSN: https://placeholder@sentry.io/123
+          NEXT_PUBLIC_POSTHOG_KEY: placeholder_posthog
+          CERT_SIGNING_PRIVATE_KEY: placeholder_cert_key
