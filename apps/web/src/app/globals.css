@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+:root {
+  /* Dark theme (primary - default) */
+  --bg: #05070d;
+  --bg-elev-1: #0a0e1a;
+  --bg-elev-2: #0f1526;
+  --border: rgba(255, 255, 255, 0.08);
+  --text: #e8ecf5;
+  --text-muted: #8c97b2;
+  --accent: #22d3ee; /* cyan */
+  --accent-2: #8b5cf6; /* violet */
+  --accent-3: #34d399; /* emerald */
+  --warn: #f59e0b;
+  --danger: #f43f5e;
+  --glass: rgba(255, 255, 255, 0.04);
+  --glow: 0 0 40px rgba(34, 211, 238, 0.25);
+
+  /* Domain accents */
+  --domain-medical: #f472b6;
+  --domain-agri: #34d399;
+  --domain-physics: #22d3ee;
+  --domain-math: #a78bfa;
+  --domain-frontier: #fbbf24;
+
+  /* Fluid type scale */
+  --fs-display: clamp(2.75rem, 1.6rem + 5.5vw, 6rem);
+  --fs-h1: clamp(2.25rem, 1.5rem + 3.2vw, 4rem);
+  --fs-h2: clamp(1.75rem, 1.3rem + 1.8vw, 2.75rem);
+  --fs-h3: clamp(1.25rem, 1.1rem + 0.7vw, 1.75rem);
+  --fs-body: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+}
+
+.light {
+  --bg: #f8fafc;
+  --bg-elev-1: #ffffff;
+  --bg-elev-2: #f1f5f9;
+  --border: rgba(0, 0, 0, 0.08);
+  --text: #0f172a;
+  --text-muted: #64748b;
+  --glass: rgba(255, 255, 255, 0.7);
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}

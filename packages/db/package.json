@@ -1,0 +1,20 @@
+{
+  "name": "@softcapphyjas/db",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.3.1",
+    "@softcapphyjas/config": "workspace:*"
+  },
+  "devDependencies": {
+    "prisma": "^6.3.1",
+    "typescript": "^5.7.3"
+  }
+}

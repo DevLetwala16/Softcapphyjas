@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "composite": true
+  },
+  "files": [],
+  "references": [
+    { "path": "./packages/config" },
+    { "path": "./packages/ui" },
+    { "path": "./packages/db" },
+    { "path": "./packages/auth" },
+    { "path": "./packages/payments" },
+    { "path": "./packages/ai" },
+    { "path": "./packages/emails" },
+    { "path": "./apps/web" },
+    { "path": "./apps/worker" }
+  ]
+}
