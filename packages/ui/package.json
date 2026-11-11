@@ -9,8 +9,20 @@
     "lint": "eslint src --ext .ts,.tsx"
   },
   "dependencies": {
+    "@radix-ui/react-accordion": "^1.3.1",
+    "@radix-ui/react-checkbox": "^1.4.1",
+    "@radix-ui/react-dialog": "^1.3.1",
+    "@radix-ui/react-radio-group": "^1.5.1",
+    "@radix-ui/react-select": "^2.4.1",
+    "@radix-ui/react-slot": "^1.5.0",
+    "@radix-ui/react-switch": "^1.4.1",
+    "@radix-ui/react-tabs": "^1.2.1",
     "@softcapphyjas/config": "workspace:*",
+    "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "cmdk": "^1.1.1",
+    "lucide-react": "^0.475.0",
+    "sonner": "^2.0.8",
     "tailwind-merge": "^3.0.2"
   },
   "devDependencies": {

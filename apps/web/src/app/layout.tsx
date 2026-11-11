@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { ThemeProvider } from "../components/theme-provider";
+import { Toaster } from "@softcapphyjas/ui";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -16,8 +18,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body className="bg-[var(--bg)] text-[var(--text)] antialiased">{children}</body>
+    <html lang="en" suppressHydrationWarning className="dark">
+      <body className="bg-[var(--bg)] text-[var(--text)] antialiased min-h-screen selection:bg-[var(--accent)] selection:text-[#05070D]">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+          <Toaster />
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
