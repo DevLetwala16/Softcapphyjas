@@ -21,10 +21,14 @@ export function ThemeToggle({
 
   React.useEffect(() => {
     setMounted(true);
-    const root = document.documentElement;
-    const isLight = root.classList.contains("light");
-    setCurrentTheme(isLight ? "light" : "dark");
-  }, []);
+    if (theme === "light" || theme === "dark") {
+      setCurrentTheme(theme);
+    } else {
+      const root = document.documentElement;
+      const isLight = root.classList.contains("light");
+      setCurrentTheme(isLight ? "light" : "dark");
+    }
+  }, [theme]);
 
   const handleToggle = () => {
     const nextTheme = currentTheme === "dark" ? "light" : "dark";

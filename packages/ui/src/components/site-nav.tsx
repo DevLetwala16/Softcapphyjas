@@ -13,7 +13,6 @@ import {
   Binary,
 } from "lucide-react";
 import { Button } from "./button";
-import { Badge } from "./badge";
 import { ThemeToggle } from "./theme-toggle";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "./accordion";
 import { cn } from "../utils";

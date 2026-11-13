@@ -13,7 +13,6 @@ import {
   ArrowRight,
   ShieldCheck,
   Sun,
-  Moon,
 } from "lucide-react";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "./dialog";
 import { cn } from "../utils";

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "../components/theme-provider";
+import { AuthProvider } from "../components/auth-provider";
 import { Toaster } from "@softcapphyjas/ui";
 import "./globals.css";
 
@@ -26,8 +27,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
-          <Toaster />
+          <AuthProvider>
+            {children}
+            <Toaster />
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>

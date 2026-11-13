@@ -1,16 +1,800 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [vector]
 }
 
-// Initial Foundation Model for verification
-model SystemHealth {
-  id        String   @id @default(cuid())
-  status    String   @default("OK")
-  updatedAt DateTime @updatedAt
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+  HR_MANAGER
+  HR_EXECUTIVE
+  RESEARCHER
+  INSTRUCTOR
+  CONTENT_EDITOR
+  ENGINEER
+  SALES_MANAGER
+  FINANCE
+  EMPLOYEE
+  CLIENT
+  STUDENT
+  APPLICANT
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  PARTIALLY_PAID
+  FAILED
+  REFUNDED
+  CANCELLED
+}
+
+enum PaymentMethod {
+  CARD
+  UPI
+  NETBANKING
+  CARD_EMI
+  CARDLESS_EMI
+  INSTALLMENT
+  WALLET
+}
+
+enum InstallmentStatus {
+  SCHEDULED
+  DUE
+  PAID
+  OVERDUE
+  WAIVED
+}
+
+enum ProjectStatus {
+  LEAD
+  QUALIFIED
+  PROPOSAL
+  BOOKED
+  ACTIVE
+  DELIVERED
+  CLOSED
+}
+
+enum PublishStatus {
+  DRAFT
+  IN_REVIEW
+  SCHEDULED
+  PUBLISHED
+  ARCHIVED
+}
+
+// ── 1. IDENTITY & USERS ──────────────────────────────────────────────
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  emailVerified DateTime?
+  passwordHash  String?
+  name          String?
+  image         String?
+  roles         Role[]    @default([STUDENT])
+  mfaSecret     String?
+  mfaEnabled    Boolean   @default(false)
+  locale        String    @default("en")
+  lastLoginAt   DateTime?
+  deletedAt     DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  accounts          Account[]
+  sessions          Session[]
+  employee          Employee?
+  enrollments       Enrollment[]
+  orders            Order[]
+  projects          Project[]       @relation("ClientProjects")
+  auditLogs         AuditLog[]
+  reviews           Review[]
+  quizAttempts      QuizAttempt[]
+  authoredPosts     Post[]          @relation("PostAuthor")
+  instructorCourses Course[]        @relation("CourseInstructor")
+  subscriptions     Subscription[]
+
+  @@index([email])
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ── 2. LMS (ACADEMY, COURSES, LEARNING) ─────────────────────────────
+
+model Course {
+  id                    String        @id @default(cuid())
+  slug                  String        @unique
+  title                 String
+  subtitle              String?
+  description           String        @db.Text
+  level                 String        // BEGINNER | INTERMEDIATE | ADVANCED
+  category              String        // ML, DL, AGENTIC, MLOPS, LLMOPS, SECURITY, SYSTEM_DESIGN
+  priceInPaise          Int
+  compareAtPaise        Int?
+  emiEligible           Boolean       @default(true)
+  durationMinutes       Int
+  thumbnailUrl          String?
+  status                PublishStatus @default(DRAFT)
+  instructorId          String
+  certificateTemplateId String?
+  deletedAt             DateTime?
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt
+
+  instructor  User         @relation("CourseInstructor", fields: [instructorId], references: [id])
+  modules     Module[]
+  enrollments Enrollment[]
+  reviews     Review[]
+
+  @@index([category, status])
+}
+
+model Module {
+  id        String   @id @default(cuid())
+  courseId  String
+  title     String
+  position  Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  course  Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  lessons Lesson[]
+
+  @@index([courseId])
+}
+
+model Lesson {
+  id            String   @id @default(cuid())
+  moduleId      String
+  title         String
+  position      Int
+  type          String   // VIDEO | PDF | QUIZ | ARTICLE
+  muxPlaybackId String?
+  muxAssetId    String?
+  pdfKey        String?
+  contentMd     String?  @db.Text
+  durationSec   Int?
+  isPreview     Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  module   Module           @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  quiz     Quiz?
+  progress LessonProgress[]
+
+  @@index([moduleId])
+}
+
+model Quiz {
+  id           String   @id @default(cuid())
+  lessonId     String   @unique
+  passMark     Int      @default(70)
+  maxAttempts  Int      @default(3)
+  timeLimitSec Int?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  lesson    Lesson        @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  questions Question[]
+  attempts  QuizAttempt[]
+}
+
+model Question {
+  id          String   @id @default(cuid())
+  quizId      String
+  kind        String   // MCQ | MULTI_SELECT | CODE
+  prompt      String   @db.Text
+  options     Json
+  answer      Json
+  explanation String?  @db.Text
+  points      Int      @default(1)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  quiz Quiz @relation(fields: [quizId], references: [id], onDelete: Cascade)
+
+  @@index([quizId])
+}
+
+model QuizAttempt {
+  id          String    @id @default(cuid())
+  quizId      String
+  userId      String
+  score       Int
+  passed      Boolean
+  answers     Json
+  startedAt   DateTime  @default(now())
+  submittedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  quiz Quiz @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([quizId])
+  @@index([userId])
+}
+
+model Enrollment {
+  id             String    @id @default(cuid())
+  userId         String
+  courseId       String
+  source         String    // PURCHASE | SUBSCRIPTION | GRANT
+  orderId        String?
+  subscriptionId String?
+  progressPct    Int       @default(0)
+  completedAt    DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  user           User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course         Course           @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  lessonProgress LessonProgress[]
+  certificate    Certificate?
+
+  @@unique([userId, courseId])
+  @@index([userId])
+  @@index([courseId])
+}
+
+model LessonProgress {
+  id           String   @id @default(cuid())
+  enrollmentId String
+  lessonId     String
+  positionSec  Int      @default(0)
+  completed    Boolean  @default(false)
+  updatedAt    DateTime @updatedAt
+
+  enrollment Enrollment @relation(fields: [enrollmentId], references: [id], onDelete: Cascade)
+  lesson     Lesson     @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@unique([enrollmentId, lessonId])
+  @@index([enrollmentId])
+}
+
+model Certificate {
+  id           String   @id @default(cuid())
+  publicId     String   @unique
+  enrollmentId String   @unique
+  issuedAt     DateTime @default(now())
+  signature    String
+  pdfKey       String?
+
+  enrollment Enrollment @relation(fields: [enrollmentId], references: [id], onDelete: Cascade)
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  courseId  String
+  userId    String
+  rating    Int
+  comment   String?  @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([courseId, userId])
+  @@index([courseId])
+}
+
+// ── 3. COMMERCE & PAYMENTS ──────────────────────────────────────────
+
+model Plan {
+  id              String   @id @default(cuid())
+  code            String   @unique // MONTHLY | YEARLY | ENTERPRISE
+  name            String
+  interval        String   // MONTHLY | YEARLY | CUSTOM
+  amountInPaise   Int
+  razorpayPlanId  String?
+  features        Json
+  seats           Int      @default(1)
+  active          Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  subscriptions Subscription[]
+}
+
+model Subscription {
+  id                String    @id @default(cuid())
+  userId            String
+  planId            String
+  razorpaySubId     String?   @unique
+  status            String
+  currentPeriodEnd  DateTime?
+  cancelAtPeriodEnd Boolean   @default(false)
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  plan Plan @relation(fields: [planId], references: [id])
+
+  @@index([userId])
+}
+
+model Coupon {
+  id             String    @id @default(cuid())
+  code           String    @unique
+  percentOff     Int?
+  amountOffPaise Int?
+  maxRedemptions Int?
+  redeemed       Int       @default(0)
+  validFrom      DateTime?
+  validUntil     DateTime?
+  appliesTo      Json?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+}
+
+model Order {
+  id              String      @id @default(cuid())
+  number          String      @unique // SCP-ORD-000123
+  userId          String
+  status          OrderStatus @default(PENDING)
+  subtotalPaise   Int
+  discountPaise   Int         @default(0)
+  gstPaise        Int
+  totalPaise      Int
+  currency        String      @default("INR")
+  couponId        String?
+  razorpayOrderId String?     @unique
+  invoiceKey      String?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  user            User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items           OrderItem[]
+  payments        Payment[]
+  installmentPlan InstallmentPlan?
+
+  @@index([userId])
+}
+
+model OrderItem {
+  id         String   @id @default(cuid())
+  orderId    String
+  courseId   String?
+  planId     String?
+  title      String
+  pricePaise Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([orderId])
+}
+
+model Payment {
+  id                String        @id @default(cuid())
+  orderId           String
+  razorpayPaymentId String?       @unique
+  method            PaymentMethod
+  amountPaise       Int
+  status            String
+  emiTenureMonths   Int?
+  emiIssuer         String?
+  raw               Json?
+  failureReason     String?
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([orderId])
+}
+
+model InstallmentPlan {
+  id               String   @id @default(cuid())
+  orderId          String   @unique
+  tenureMonths     Int
+  downPaymentPaise Int
+  interestBps      Int      @default(0)
+  status           String
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  order        Order         @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  installments Installment[]
+}
+
+model Installment {
+  id            String            @id @default(cuid())
+  planId        String
+  sequence      Int
+  dueDate       DateTime
+  amountPaise   Int
+  status        InstallmentStatus @default(SCHEDULED)
+  paidAt        DateTime?
+  paymentId     String?
+  remindersSent Int               @default(0)
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+
+  plan InstallmentPlan @relation(fields: [planId], references: [id], onDelete: Cascade)
+
+  @@index([planId])
+}
+
+// ── 4. PROJECTS & CAREERS ───────────────────────────────────────────
+
+model Project {
+  id               String        @id @default(cuid())
+  ref              String        @unique // SCP-2026-0001
+  clientId         String
+  title            String
+  services         String[]
+  brief            String        @db.Text
+  status           ProjectStatus @default(LEAD)
+  estimateLowPaise Int
+  estimateHighPaise Int
+  depositPaise     Int           @default(0)
+  depositPaid      Boolean       @default(false)
+  timelineWeeks    Int
+  startDate        DateTime?
+  assignedToId     String?
+  deletedAt        DateTime?
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+
+  client     User          @relation("ClientProjects", fields: [clientId], references: [id], onDelete: Cascade)
+  milestones Milestone[]
+  files      ProjectFile[]
+  meetings   Meeting[]
+  invoices   Invoice[]
+
+  @@index([clientId])
+}
+
+model Milestone {
+  id          String   @id @default(cuid())
+  projectId   String
+  title       String
+  dueDate     DateTime
+  status      String
+  amountPaise Int?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@index([projectId])
+}
+
+model ProjectFile {
+  id           String   @id @default(cuid())
+  projectId    String
+  key          String
+  name         String
+  version      Int      @default(1)
+  uploadedById String
+  scanStatus   String   @default("PENDING")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@index([projectId])
+}
+
+model Meeting {
+  id        String   @id @default(cuid())
+  projectId String?
+  startsAt  DateTime
+  endsAt    DateTime
+  link      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  project Project? @relation(fields: [projectId], references: [id], onDelete: SetNull)
+
+  @@index([projectId])
+}
+
+model Invoice {
+  id          String    @id @default(cuid())
+  number      String    @unique
+  projectId   String?
+  amountPaise Int
+  gstPaise    Int
+  status      String
+  pdfKey      String?
+  dueDate     DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  project Project? @relation(fields: [projectId], references: [id], onDelete: SetNull)
+
+  @@index([projectId])
+}
+
+model JobPosting {
+  id            String        @id @default(cuid())
+  slug          String        @unique
+  title         String
+  team          String
+  type          String
+  location      String
+  descriptionMd String        @db.Text
+  status        PublishStatus
+  deletedAt     DateTime?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  applications Application[]
+}
+
+model Application {
+  id         String   @id @default(cuid())
+  trackingId String   @unique
+  jobId      String
+  name       String
+  email      String
+  phone      String?
+  resumeKey  String
+  parsed     Json?
+  links      Json?
+  answers    Json?
+  stage      String   @default("APPLIED")
+  score      Int?
+  notes      Json?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  job JobPosting @relation(fields: [jobId], references: [id], onDelete: Cascade)
+
+  @@index([jobId])
+}
+
+// ── 5. HR CORE & EMPLOYEES ──────────────────────────────────────────
+
+model Employee {
+  id         String    @id @default(cuid())
+  userId     String    @unique
+  code       String    @unique
+  department String
+  title      String
+  managerId  String?
+  joinedOn   DateTime
+  deletedAt  DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  user       User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  attendance Attendance[]
+  tasks      Task[]
+  reviews    PerformanceReview[]
+  leaves     LeaveRequest[]
+}
+
+model Attendance {
+  id         String    @id @default(cuid())
+  employeeId String
+  date       DateTime
+  checkIn    DateTime?
+  checkOut   DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  employee Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+
+  @@unique([employeeId, date])
+  @@index([employeeId])
+}
+
+model LeaveRequest {
+  id         String   @id @default(cuid())
+  employeeId String
+  from       DateTime
+  to         DateTime
+  type       String
+  status     String   @default("PENDING")
+  approverId String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  employee Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+
+  @@index([employeeId])
+}
+
+model Task {
+  id          String    @id @default(cuid())
+  title       String
+  description String?   @db.Text
+  assigneeId  String
+  dueDate     DateTime?
+  status      String    @default("TODO")
+  priority    Int       @default(2)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  assignee Employee @relation(fields: [assigneeId], references: [id], onDelete: Cascade)
+
+  @@index([assigneeId])
+}
+
+model PerformanceReview {
+  id         String   @id @default(cuid())
+  employeeId String
+  period     String
+  goals      Json
+  rating     Int?
+  feedback   Json?
+  reviewerId String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  employee Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+
+  @@index([employeeId])
+}
+
+// ── 6. CMS, CONTENT & AI RAG ────────────────────────────────────────
+
+model Post {
+  id        String        @id @default(cuid())
+  kind      String        // BLOG | NEWS | PAPER | CASE_STUDY
+  slug      String        @unique
+  title     String
+  excerpt   String?       @db.Text
+  bodyJson  Json
+  domain    String?
+  doi       String?
+  pdfKey    String?
+  coverUrl  String?
+  authorId  String
+  status    PublishStatus @default(DRAFT)
+  publishAt DateTime?
+  seo       Json?
+  deletedAt DateTime?
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  author   User          @relation("PostAuthor", fields: [authorId], references: [id])
+  versions PostVersion[]
+
+  @@index([kind, status])
+  @@index([domain])
+}
+
+model PostVersion {
+  id          String   @id @default(cuid())
+  postId      String
+  bodyJson    Json
+  createdById String
+  createdAt   DateTime @default(now())
+
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@index([postId])
+}
+
+model BetaSignup {
+  id        String    @id @default(cuid())
+  email     String    @unique
+  useCase   String?
+  orgSize   String?
+  position  Int
+  invitedAt DateTime?
+  createdAt DateTime  @default(now())
+}
+
+model Inquiry {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  message   String   @db.Text
+  source    String
+  status    String   @default("NEW")
+  createdAt DateTime @default(now())
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  actorId   String?
+  action    String
+  entity    String
+  entityId  String
+  diff      Json?
+  ip        String?
+  ua        String?
+  createdAt DateTime @default(now())
+
+  actor User? @relation(fields: [actorId], references: [id], onDelete: SetNull)
+
+  @@index([entity, entityId])
+  @@index([actorId])
+}
+
+model WebhookEvent {
+  id          String    @id
+  provider    String
+  type        String
+  payload     Json
+  processedAt DateTime?
+  createdAt   DateTime  @default(now())
+}
+
+model FeatureFlag {
+  key       String   @id
+  enabled   Boolean  @default(false)
+  rules     Json?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Document {
+  id        String   @id @default(cuid())
+  source    String   // PAPER | BLOG | COURSE | DOC
+  title     String
+  url       String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  chunks Chunk[]
+}
+
+model Chunk {
+  id         String                      @id @default(cuid())
+  documentId String
+  text       String                      @db.Text
+  embedding  Unsupported("vector(768)")?
+  createdAt  DateTime                    @default(now())
+
+  document Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  @@index([documentId])
 }

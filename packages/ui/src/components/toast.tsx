@@ -4,7 +4,7 @@ import * as React from "react";
 import { Toaster as SonnerToaster, toast } from "sonner";
 import { CheckCircle2, AlertTriangle, AlertCircle, Info, Undo2 } from "lucide-react";
 
-export interface ToasterProps extends React.ComponentProps<typeof SonnerToaster> {}
+export type ToasterProps = React.ComponentProps<typeof SonnerToaster>;
 
 export const Toaster = ({ ...props }: ToasterProps) => {
   return (

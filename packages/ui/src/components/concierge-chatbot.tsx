@@ -12,7 +12,6 @@ import {
 } from "lucide-react";
 import { Button } from "./button";
 import { Card } from "./card";
-import { Badge } from "./badge";
 import { cn } from "../utils";
 
 export interface ChatMessage {
