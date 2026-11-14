@@ -22,3 +22,4 @@ export * from "./components/cookie-banner";
 export * from "./components/bottom-tab-bar";
 export * from "./components/concierge-chatbot";
 export * from "./components/site-nav";
+export * from "./components/site-footer";
