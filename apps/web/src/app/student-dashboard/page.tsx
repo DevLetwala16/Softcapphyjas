@@ -2,14 +2,7 @@ import { auth, signOut } from "@/auth";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { prisma } from "@softcapphyjas/db";
-import {
-  GraduationCap,
-  BookOpen,
-  Clock,
-  PlayCircle,
-  LogOut,
-  Layers,
-} from "lucide-react";
+import { GraduationCap, BookOpen, Clock, PlayCircle, LogOut, Layers } from "lucide-react";
 
 export default async function StudentDashboardPage() {
   const session = await auth();
@@ -47,7 +40,9 @@ export default async function StudentDashboardPage() {
                 S
               </div>
             </div>
-            <span className="font-mono font-bold text-sm text-white tracking-wider">ACADEMY WORKSPACE</span>
+            <span className="font-mono font-bold text-sm text-white tracking-wider">
+              ACADEMY WORKSPACE
+            </span>
             <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-[var(--accent)]/10 border border-[var(--accent)]/20 text-[var(--accent)]">
               STUDENT PORTAL
             </span>
@@ -113,7 +108,8 @@ export default async function StudentDashboardPage() {
               <GraduationCap className="w-10 h-10 text-[var(--text-muted)] mx-auto" />
               <h3 className="text-base font-semibold text-white">No active course enrollments</h3>
               <p className="text-xs text-[var(--text-muted)] max-w-sm mx-auto">
-                Explore our catalog to enroll in Machine Learning Foundations, Agentic AI, and Frontier LLMOps.
+                Explore our catalog to enroll in Machine Learning Foundations, Agentic AI, and
+                Frontier LLMOps.
               </p>
             </div>
           ) : (
@@ -159,7 +155,8 @@ export default async function StudentDashboardPage() {
                     <div className="pt-3 border-t border-[var(--border)] flex items-center justify-between text-xs">
                       <span className="text-[var(--text-muted)] flex items-center gap-1 font-mono">
                         <Clock className="w-3.5 h-3.5" />
-                        {totalLessons} lessons · {Math.round(enrol.course.durationMinutes / 60)}h total
+                        {totalLessons} lessons · {Math.round(enrol.course.durationMinutes / 60)}h
+                        total
                       </span>
 
                       <button

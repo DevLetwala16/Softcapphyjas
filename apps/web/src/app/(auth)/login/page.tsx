@@ -187,8 +187,12 @@ function LoginForm() {
               </div>
             </div>
             <div className="flex flex-col">
-              <span className="font-mono font-bold text-lg tracking-wider text-white">SOFTCAPPHYJAS</span>
-              <span className="text-xs text-[var(--text-muted)] tracking-wider">FRONTIER AI & ENTERPRISE</span>
+              <span className="font-mono font-bold text-lg tracking-wider text-white">
+                SOFTCAPPHYJAS
+              </span>
+              <span className="text-xs text-[var(--text-muted)] tracking-wider">
+                FRONTIER AI & ENTERPRISE
+              </span>
             </div>
           </Link>
         </div>
@@ -208,7 +212,8 @@ function LoginForm() {
           </h1>
 
           <p className="text-[var(--text-muted)] text-base leading-relaxed">
-            Access your unified workspace across frontier scientific domains, student learning tracks, and enterprise cognitive swarms.
+            Access your unified workspace across frontier scientific domains, student learning
+            tracks, and enterprise cognitive swarms.
           </p>
 
           {/* Domain Chips */}
@@ -403,7 +408,9 @@ function LoginForm() {
                   </div>
                   <h3 className="text-base font-semibold text-white">Magic Link Dispatched</h3>
                   <p className="text-xs text-[var(--text-muted)] leading-relaxed">
-                    If an account is associated with <span className="text-white font-mono">{email}</span>, a secure authentication link has been sent. Check your inbox and spam folder.
+                    If an account is associated with{" "}
+                    <span className="text-white font-mono">{email}</span>, a secure authentication
+                    link has been sent. Check your inbox and spam folder.
                   </p>
                   <button
                     type="button"
@@ -511,7 +518,8 @@ function LoginForm() {
               </summary>
               <div className="mt-3 space-y-2 pt-2 border-t border-white/5">
                 <p className="text-[11px] text-[var(--text-muted)]">
-                  Click to prefill demo accounts (password: <code className="text-white">Password123!</code>):
+                  Click to prefill demo accounts (password:{" "}
+                  <code className="text-white">Password123!</code>):
                 </p>
                 <div className="grid grid-cols-2 gap-1.5">
                   <button
@@ -520,7 +528,9 @@ function LoginForm() {
                     className="p-2 rounded bg-white/5 hover:bg-white/10 text-left transition text-[11px]"
                   >
                     <span className="font-semibold text-white block">Super Admin</span>
-                    <span className="text-[10px] text-[var(--text-muted)]">admin@softcapphyjas.com</span>
+                    <span className="text-[10px] text-[var(--text-muted)]">
+                      admin@softcapphyjas.com
+                    </span>
                   </button>
                   <button
                     type="button"
@@ -528,7 +538,9 @@ function LoginForm() {
                     className="p-2 rounded bg-white/5 hover:bg-white/10 text-left transition text-[11px]"
                   >
                     <span className="font-semibold text-white block">Lead Instructor</span>
-                    <span className="text-[10px] text-[var(--text-muted)]">instructor@softcapphyjas.com</span>
+                    <span className="text-[10px] text-[var(--text-muted)]">
+                      instructor@softcapphyjas.com
+                    </span>
                   </button>
                   <button
                     type="button"
@@ -536,7 +548,9 @@ function LoginForm() {
                     className="p-2 rounded bg-white/5 hover:bg-white/10 text-left transition text-[11px]"
                   >
                     <span className="font-semibold text-white block">Student / Learner</span>
-                    <span className="text-[10px] text-[var(--text-muted)]">student@learner.org</span>
+                    <span className="text-[10px] text-[var(--text-muted)]">
+                      student@learner.org
+                    </span>
                   </button>
                   <button
                     type="button"
@@ -544,7 +558,9 @@ function LoginForm() {
                     className="p-2 rounded bg-white/5 hover:bg-white/10 text-left transition text-[11px]"
                   >
                     <span className="font-semibold text-white block">Enterprise Client</span>
-                    <span className="text-[10px] text-[var(--text-muted)]">client@acmecorp.com</span>
+                    <span className="text-[10px] text-[var(--text-muted)]">
+                      client@acmecorp.com
+                    </span>
                   </button>
                 </div>
               </div>

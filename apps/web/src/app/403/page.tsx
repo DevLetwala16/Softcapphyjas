@@ -43,16 +43,24 @@ export default function ForbiddenPage() {
           <span className="font-mono text-xs font-semibold text-rose-400 tracking-widest uppercase">
             HTTP 403 · Access Restricted
           </span>
-          <h1 className="text-2xl font-bold text-white tracking-tight">You don&apos;t have access</h1>
+          <h1 className="text-2xl font-bold text-white tracking-tight">
+            You don&apos;t have access
+          </h1>
           <p className="text-xs text-[var(--text-muted)] leading-relaxed">
-            Your authenticated session lacks the required role permissions for this resource, or staff MFA verification has not been completed.
+            Your authenticated session lacks the required role permissions for this resource, or
+            staff MFA verification has not been completed.
           </p>
         </div>
 
         {session?.user && (
           <div className="p-3 rounded-xl bg-white/5 border border-white/5 text-xs text-left space-y-1 font-mono">
-            <div className="text-[var(--text-muted)]">Signed in: <span className="text-white">{session.user.email}</span></div>
-            <div className="text-[var(--text-muted)]">Assigned roles: <span className="text-[var(--accent)]">{roles.join(", ") || "None"}</span></div>
+            <div className="text-[var(--text-muted)]">
+              Signed in: <span className="text-white">{session.user.email}</span>
+            </div>
+            <div className="text-[var(--text-muted)]">
+              Assigned roles:{" "}
+              <span className="text-[var(--accent)]">{roles.join(", ") || "None"}</span>
+            </div>
           </div>
         )}
 

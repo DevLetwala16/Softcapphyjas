@@ -42,7 +42,9 @@ export default async function ClientDashboardPage() {
                 S
               </div>
             </div>
-            <span className="font-mono font-bold text-sm text-white tracking-wider">ENTERPRISE PORTAL</span>
+            <span className="font-mono font-bold text-sm text-white tracking-wider">
+              ENTERPRISE PORTAL
+            </span>
             <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-[var(--accent-2)]/10 border border-[var(--accent-2)]/20 text-[var(--accent-2)]">
               CLIENT WORKSPACE
             </span>
@@ -106,7 +108,8 @@ export default async function ClientDashboardPage() {
               <Building2 className="w-10 h-10 text-[var(--text-muted)] mx-auto" />
               <h3 className="text-base font-semibold text-white">No active engagements</h3>
               <p className="text-xs text-[var(--text-muted)] max-w-sm mx-auto">
-                Submit an enterprise inquiry or engage our engineering teams at /hire-us to initiate a project.
+                Submit an enterprise inquiry or engage our engineering teams at /hire-us to initiate
+                a project.
               </p>
             </div>
           ) : (

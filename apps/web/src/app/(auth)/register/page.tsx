@@ -102,7 +102,9 @@ export default function RegisterPage() {
                 S
               </div>
             </div>
-            <span className="font-mono font-bold text-lg tracking-wider text-white">SOFTCAPPHYJAS</span>
+            <span className="font-mono font-bold text-lg tracking-wider text-white">
+              SOFTCAPPHYJAS
+            </span>
           </Link>
           <h1 className="text-2xl font-bold text-white tracking-tight">Create your account</h1>
           <p className="text-xs text-[var(--text-muted)]">
@@ -119,7 +121,10 @@ export default function RegisterPage() {
         )}
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="space-y-5 bg-[var(--bg-elev-1)] border border-[var(--border)] rounded-2xl p-6 sm:p-8 shadow-xl">
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-5 bg-[var(--bg-elev-1)] border border-[var(--border)] rounded-2xl p-6 sm:p-8 shadow-xl"
+        >
           {/* Full Name */}
           <div className="space-y-1.5">
             <label className="text-xs font-medium text-white/90">Full Name</label>
@@ -154,7 +159,9 @@ export default function RegisterPage() {
 
           {/* Role Intent Selector */}
           <div className="space-y-1.5">
-            <label className="text-xs font-medium text-white/90">I am joining primarily as a:</label>
+            <label className="text-xs font-medium text-white/90">
+              I am joining primarily as a:
+            </label>
             <div className="grid grid-cols-2 gap-3">
               <button
                 type="button"
@@ -240,17 +247,29 @@ export default function RegisterPage() {
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-1 text-[11px] text-[var(--text-muted)]">
-                  <span className={`flex items-center gap-1 ${hasMinLength ? "text-emerald-400" : ""}`}>
-                    {hasMinLength ? <Check className="w-3 h-3" /> : <X className="w-3 h-3" />} 8+ characters
+                  <span
+                    className={`flex items-center gap-1 ${hasMinLength ? "text-emerald-400" : ""}`}
+                  >
+                    {hasMinLength ? <Check className="w-3 h-3" /> : <X className="w-3 h-3" />} 8+
+                    characters
                   </span>
-                  <span className={`flex items-center gap-1 ${hasUppercase ? "text-emerald-400" : ""}`}>
-                    {hasUppercase ? <Check className="w-3 h-3" /> : <X className="w-3 h-3" />} Uppercase letter
+                  <span
+                    className={`flex items-center gap-1 ${hasUppercase ? "text-emerald-400" : ""}`}
+                  >
+                    {hasUppercase ? <Check className="w-3 h-3" /> : <X className="w-3 h-3" />}{" "}
+                    Uppercase letter
                   </span>
-                  <span className={`flex items-center gap-1 ${hasNumber ? "text-emerald-400" : ""}`}>
-                    {hasNumber ? <Check className="w-3 h-3" /> : <X className="w-3 h-3" />} Number (0-9)
+                  <span
+                    className={`flex items-center gap-1 ${hasNumber ? "text-emerald-400" : ""}`}
+                  >
+                    {hasNumber ? <Check className="w-3 h-3" /> : <X className="w-3 h-3" />} Number
+                    (0-9)
                   </span>
-                  <span className={`flex items-center gap-1 ${hasSpecial ? "text-emerald-400" : ""}`}>
-                    {hasSpecial ? <Check className="w-3 h-3" /> : <X className="w-3 h-3" />} Special character
+                  <span
+                    className={`flex items-center gap-1 ${hasSpecial ? "text-emerald-400" : ""}`}
+                  >
+                    {hasSpecial ? <Check className="w-3 h-3" /> : <X className="w-3 h-3" />} Special
+                    character
                   </span>
                 </div>
               </div>

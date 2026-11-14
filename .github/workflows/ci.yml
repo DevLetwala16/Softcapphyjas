@@ -2,7 +2,7 @@ name: CI Pipeline
 
 on:
   push:
-    branches: [main, "phase/*"]
+    branches: [main, "phase/*", "phase-*"]
   pull_request:
     branches: [main]
 
@@ -32,6 +32,9 @@ jobs:
       - name: Install Monorepo Dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Generate Prisma Client
+        run: pnpm --filter @softcapphyjas/db run prisma:generate
+
       - name: Check Formatting (Prettier)
         run: pnpm format:check
 
@@ -41,13 +44,17 @@ jobs:
       - name: Type Verification (TypeScript Strict)
         run: pnpm typecheck
 
+      - name: Run Test Suites
+        run: pnpm -r test
+
       - name: Build Web Application
-        run: pnpm build
+        run: pnpm --filter @softcapphyjas/web build
         env:
           NODE_ENV: production
           NEXT_PUBLIC_APP_URL: https://softcapphyjas.com
           DATABASE_URL: postgresql://postgres:postgres@localhost:5432/softcapphyjas
           AUTH_SECRET: ci_pipeline_super_secret_key_32_bytes_min_length
+          AUTH_TRUST_HOST: "true"
           AUTH_GOOGLE_ID: placeholder_google_id
           AUTH_GOOGLE_SECRET: placeholder_google_secret
           AUTH_GITHUB_ID: placeholder_github_id

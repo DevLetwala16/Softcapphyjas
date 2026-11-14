@@ -116,7 +116,9 @@ function MfaVerificationContent() {
           <div className="inline-block px-2.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] font-mono text-[var(--accent)] uppercase tracking-wider">
             Staff Security Gate
           </div>
-          <h1 className="text-2xl font-bold text-white tracking-tight">Two-Factor Authentication</h1>
+          <h1 className="text-2xl font-bold text-white tracking-tight">
+            Two-Factor Authentication
+          </h1>
           <p className="text-xs text-[var(--text-muted)] leading-relaxed">
             Staff access requires mandatory time-based one-time password (TOTP) verification.
           </p>

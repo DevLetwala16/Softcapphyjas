@@ -101,12 +101,8 @@ export function ErrorState({
       <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#F43F5E]/15 text-[#F43F5E] mb-4">
         <AlertCircle className="h-7 w-7" />
       </div>
-      <h3 className="font-display text-lg font-semibold text-[var(--text)] mb-1.5">
-        {title}
-      </h3>
-      <p className="text-sm text-[var(--text-muted)] max-w-md leading-relaxed mb-3">
-        {message}
-      </p>
+      <h3 className="font-display text-lg font-semibold text-[var(--text)] mb-1.5">{title}</h3>
+      <p className="text-sm text-[var(--text-muted)] max-w-md leading-relaxed mb-3">{message}</p>
       {errorId && (
         <div className="text-xs font-mono-data text-[var(--text-muted)] bg-[var(--bg-elev-1)] px-2.5 py-1 rounded-md border border-[var(--border)] mb-5">
           Error Reference: <span className="text-[#F43F5E] font-bold">{errorId}</span>
@@ -156,7 +152,9 @@ export function PermissionDeniedState({
         You don't have access to {resourceName}
       </h3>
       <p className="text-sm text-[var(--text-muted)] max-w-md leading-relaxed mb-3">
-        This portal section requires the elevated <span className="font-mono-data font-semibold text-[var(--text)]">{roleRequired}</span> role. Direct URLs render this security boundary and never expose protected data.
+        This portal section requires the elevated{" "}
+        <span className="font-mono-data font-semibold text-[var(--text)]">{roleRequired}</span>{" "}
+        role. Direct URLs render this security boundary and never expose protected data.
       </p>
       {onRequestAccess && (
         <Button
@@ -217,12 +215,7 @@ export function RateLimitedState({
         <span className="text-base text-[var(--text)]">{secondsLeft}s</span>
       </div>
       {onRetry && (
-        <Button
-          variant="primary"
-          size="sm"
-          disabled={secondsLeft > 0}
-          onClick={onRetry}
-        >
+        <Button variant="primary" size="sm" disabled={secondsLeft > 0} onClick={onRetry}>
           {secondsLeft > 0 ? "Cooling down..." : "Try Again Now"}
         </Button>
       )}
@@ -248,9 +241,7 @@ export function OfflineBanner({
     >
       <div className="flex items-center gap-2">
         <WifiOff className="h-4 w-4 shrink-0" />
-        <span>
-          Offline Mode — changes will automatically synchronize when connection resumes.
-        </span>
+        <span>Offline Mode — changes will automatically synchronize when connection resumes.</span>
       </div>
       {queuedCount > 0 && (
         <span className="font-mono-data font-semibold bg-black/15 px-2 py-0.5 rounded text-xs">
@@ -290,7 +281,8 @@ export function FormErrorSummary({ errors, className }: FormErrorSummaryProps) {
       <div className="flex items-center gap-2 text-[#F43F5E] font-semibold mb-2">
         <ShieldAlert className="h-4 w-4 shrink-0" />
         <h4 id="error-summary-heading">
-          There {errors.length === 1 ? "is 1 problem" : `are ${errors.length} problems`} with your submission
+          There {errors.length === 1 ? "is 1 problem" : `are ${errors.length} problems`} with your
+          submission
         </h4>
       </div>
       <ul className="list-disc list-inside space-y-1 text-xs text-[var(--text-muted)]">

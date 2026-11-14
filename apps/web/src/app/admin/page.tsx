@@ -44,7 +44,9 @@ export default async function AdminDashboardPage() {
                 S
               </div>
             </div>
-            <span className="font-mono font-bold text-sm text-white tracking-wider">COMMAND CENTER</span>
+            <span className="font-mono font-bold text-sm text-white tracking-wider">
+              COMMAND CENTER
+            </span>
             <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-amber-400/10 border border-amber-400/20 text-amber-400">
               STAFF PORTAL
             </span>
@@ -132,7 +134,9 @@ export default async function AdminDashboardPage() {
               <BookOpen className="w-4 h-4 text-[var(--accent-2)]" />
             </div>
             <div className="text-2xl font-bold text-white font-mono">{courseCount}</div>
-            <div className="text-[11px] text-[var(--text-muted)] font-mono">ML, Agentic & LLMOps</div>
+            <div className="text-[11px] text-[var(--text-muted)] font-mono">
+              ML, Agentic & LLMOps
+            </div>
           </div>
 
           <div className="p-5 rounded-xl bg-[var(--bg-elev-1)] border border-[var(--border)] space-y-3">
@@ -141,7 +145,9 @@ export default async function AdminDashboardPage() {
               <DollarSign className="w-4 h-4 text-emerald-400" />
             </div>
             <div className="text-2xl font-bold text-white font-mono">{orderCount}</div>
-            <div className="text-[11px] text-[var(--text-muted)] font-mono">Razorpay & EMI Ready</div>
+            <div className="text-[11px] text-[var(--text-muted)] font-mono">
+              Razorpay & EMI Ready
+            </div>
           </div>
 
           <div className="p-5 rounded-xl bg-[var(--bg-elev-1)] border border-[var(--border)] space-y-3">
@@ -150,7 +156,9 @@ export default async function AdminDashboardPage() {
               <Briefcase className="w-4 h-4 text-amber-400" />
             </div>
             <div className="text-2xl font-bold text-white font-mono">{projectCount}</div>
-            <div className="text-[11px] text-[var(--text-muted)] font-mono">Active Client Engagements</div>
+            <div className="text-[11px] text-[var(--text-muted)] font-mono">
+              Active Client Engagements
+            </div>
           </div>
         </div>
 
@@ -168,21 +176,24 @@ export default async function AdminDashboardPage() {
             <div className="p-4 rounded-xl bg-[var(--bg)] border border-[var(--border)] space-y-2">
               <span className="font-semibold text-white block">PostgreSQL 16 + pgvector</span>
               <p className="text-[var(--text-muted)] leading-relaxed">
-                Full schema deployed to Neon cloud with pgvector extensions, 25+ models, and seeded mock datasets.
+                Full schema deployed to Neon cloud with pgvector extensions, 25+ models, and seeded
+                mock datasets.
               </p>
             </div>
 
             <div className="p-4 rounded-xl bg-[var(--bg)] border border-[var(--border)] space-y-2">
               <span className="font-semibold text-white block">Auth.js v5 + RBAC Policy</span>
               <p className="text-[var(--text-muted)] leading-relaxed">
-                Role routing across 14 distinct roles. Enforced in middleware, tRPC API gate, and data queries.
+                Role routing across 14 distinct roles. Enforced in middleware, tRPC API gate, and
+                data queries.
               </p>
             </div>
 
             <div className="p-4 rounded-xl bg-[var(--bg)] border border-[var(--border)] space-y-2">
               <span className="font-semibold text-white block">Staff MFA (TOTP)</span>
               <p className="text-[var(--text-muted)] leading-relaxed">
-                Mandatory two-factor enrollment and verification with Google Authenticator, QR codes, and backup keys.
+                Mandatory two-factor enrollment and verification with Google Authenticator, QR
+                codes, and backup keys.
               </p>
             </div>
           </div>

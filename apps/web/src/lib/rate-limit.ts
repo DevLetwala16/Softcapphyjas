@@ -11,7 +11,10 @@ if (typeof setInterval !== "undefined") {
   setInterval(() => {
     const now = Date.now();
     for (const [key, entry] of attemptStore.entries()) {
-      if (now - entry.lastAttempt > 15 * 60 * 1000 && (!entry.blockedUntil || now > entry.blockedUntil)) {
+      if (
+        now - entry.lastAttempt > 15 * 60 * 1000 &&
+        (!entry.blockedUntil || now > entry.blockedUntil)
+      ) {
         attemptStore.delete(key);
       }
     }

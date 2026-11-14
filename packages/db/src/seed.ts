@@ -1,4 +1,11 @@
-import { PrismaClient, Role, OrderStatus, PaymentMethod, PublishStatus, ProjectStatus } from "@prisma/client";
+import {
+  PrismaClient,
+  Role,
+  OrderStatus,
+  PaymentMethod,
+  PublishStatus,
+  ProjectStatus,
+} from "@prisma/client";
 import bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();
@@ -212,7 +219,8 @@ async function main() {
     data: {
       quizId: quiz1.id,
       kind: "MCQ",
-      prompt: "Under which condition do KKT conditions become necessary and sufficient for global optimality?",
+      prompt:
+        "Under which condition do KKT conditions become necessary and sufficient for global optimality?",
       options: [
         "When the objective is convex and inequality constraints are affine",
         "When the objective is strictly non-convex",
@@ -220,7 +228,8 @@ async function main() {
         "Only when the Hessian determinant is negative",
       ],
       answer: 0,
-      explanation: "Slater's condition ensures strong duality for convex optimization problems with affine constraints.",
+      explanation:
+        "Slater's condition ensures strong duality for convex optimization problems with affine constraints.",
       points: 2,
     },
   });
@@ -269,7 +278,8 @@ async function main() {
     data: {
       slug: "frontier-llmops-and-alignment",
       title: "Frontier LLMOps, DPO & Mechanistic Interpretability",
-      subtitle: "Production fine-tuning, activation steering, RLHF, and automated safety evaluation",
+      subtitle:
+        "Production fine-tuning, activation steering, RLHF, and automated safety evaluation",
       description:
         "Learn direct preference optimization (DPO), representation engineering, sparse autoencoders (SAE), and continuous canary evaluation.",
       level: "ADVANCED",
@@ -454,8 +464,14 @@ async function main() {
         abstract:
           "Emergency department triage demands high diagnostic velocity under stringent safety constraints. We demonstrate a hybrid neuro-symbolic engine...",
         sections: [
-          { heading: "Introduction", content: "Clinical decision support often fails due to hallucination risks..." },
-          { heading: "Formal Verification Layer", content: "By translating medical protocols into SMT constraints..." },
+          {
+            heading: "Introduction",
+            content: "Clinical decision support often fails due to hallucination risks...",
+          },
+          {
+            heading: "Formal Verification Layer",
+            content: "By translating medical protocols into SMT constraints...",
+          },
         ],
       },
       domain: "medical",

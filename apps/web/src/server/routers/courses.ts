@@ -45,42 +45,40 @@ export const coursesRouter = router({
       });
     }),
 
-  getById: publicProcedure
-    .input(z.object({ id: z.string() }))
-    .query(async ({ ctx, input }) => {
-      const scopedWhere = dataGate.scopeCourses(ctx.session?.user, {
-        id: input.id,
-      });
+  getById: publicProcedure.input(z.object({ id: z.string() })).query(async ({ ctx, input }) => {
+    const scopedWhere = dataGate.scopeCourses(ctx.session?.user, {
+      id: input.id,
+    });
 
-      const course = await ctx.prisma.course.findFirst({
-        where: scopedWhere,
-        include: {
-          instructor: {
-            select: { id: true, name: true, image: true },
-          },
-          modules: {
-            include: {
-              lessons: {
-                include: {
-                  quiz: true,
-                },
-                orderBy: { position: "asc" },
-              },
-            },
-            orderBy: { position: "asc" },
-          },
+    const course = await ctx.prisma.course.findFirst({
+      where: scopedWhere,
+      include: {
+        instructor: {
+          select: { id: true, name: true, image: true },
         },
+        modules: {
+          include: {
+            lessons: {
+              include: {
+                quiz: true,
+              },
+              orderBy: { position: "asc" },
+            },
+          },
+          orderBy: { position: "asc" },
+        },
+      },
+    });
+
+    if (!course) {
+      throw new TRPCError({
+        code: "NOT_FOUND",
+        message: "Course not found or access denied",
       });
+    }
 
-      if (!course) {
-        throw new TRPCError({
-          code: "NOT_FOUND",
-          message: "Course not found or access denied",
-        });
-      }
-
-      return course;
-    }),
+    return course;
+  }),
 
   create: rbacProcedure("write", "lms")
     .input(

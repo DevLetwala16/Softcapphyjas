@@ -22,31 +22,29 @@ export const projectsRouter = router({
     });
   }),
 
-  getById: protectedProcedure
-    .input(z.object({ id: z.string() }))
-    .query(async ({ ctx, input }) => {
-      const scopedWhere = dataGate.scopeProjects(ctx.session.user, {
-        id: input.id,
-      });
+  getById: protectedProcedure.input(z.object({ id: z.string() })).query(async ({ ctx, input }) => {
+    const scopedWhere = dataGate.scopeProjects(ctx.session.user, {
+      id: input.id,
+    });
 
-      const project = await ctx.prisma.project.findFirst({
-        where: scopedWhere,
-        include: {
-          milestones: {
-            orderBy: { dueDate: "asc" },
-          },
-          files: true,
-          invoices: true,
+    const project = await ctx.prisma.project.findFirst({
+      where: scopedWhere,
+      include: {
+        milestones: {
+          orderBy: { dueDate: "asc" },
         },
+        files: true,
+        invoices: true,
+      },
+    });
+
+    if (!project) {
+      throw new TRPCError({
+        code: "NOT_FOUND",
+        message: "Project not found or unauthorized",
       });
+    }
 
-      if (!project) {
-        throw new TRPCError({
-          code: "NOT_FOUND",
-          message: "Project not found or unauthorized",
-        });
-      }
-
-      return project;
-    }),
+    return project;
+  }),
 });

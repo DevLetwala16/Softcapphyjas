@@ -110,10 +110,7 @@ describe("RBAC Engine Permission Matrix (Spec §7.2 & Board 26)", () => {
   });
 
   it("INSTRUCTOR has attribute-scoped write to LMS (own courses only)", () => {
-    assert.equal(
-      can(instructorUser, "write", "lms", { instructorId: instructorUser.id }),
-      true
-    );
+    assert.equal(can(instructorUser, "write", "lms", { instructorId: instructorUser.id }), true);
     assert.equal(
       can(instructorUser, "write", "lms", { instructorId: "different-instructor" }),
       false
@@ -122,14 +119,8 @@ describe("RBAC Engine Permission Matrix (Spec §7.2 & Board 26)", () => {
   });
 
   it("RESEARCHER can RW own CMS papers only", () => {
-    assert.equal(
-      can(researcherUser, "write", "cms", { authorId: researcherUser.id }),
-      true
-    );
-    assert.equal(
-      can(researcherUser, "write", "cms", { authorId: "other-researcher" }),
-      false
-    );
+    assert.equal(can(researcherUser, "write", "cms", { authorId: researcherUser.id }), true);
+    assert.equal(can(researcherUser, "write", "cms", { authorId: "other-researcher" }), false);
     assert.equal(can(researcherUser, "approve", "cms"), false);
   });
 

@@ -63,8 +63,7 @@ export const SelectScrollDownButton = React.forwardRef<
     <ChevronDown className="h-4 w-4" />
   </SelectPrimitive.ScrollDownButton>
 ));
-SelectScrollDownButton.displayName =
-  SelectPrimitive.ScrollDownButton.displayName;
+SelectScrollDownButton.displayName = SelectPrimitive.ScrollDownButton.displayName;
 
 export const SelectContent = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Content>,
@@ -105,7 +104,10 @@ export const SelectLabel = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <SelectPrimitive.Label
     ref={ref}
-    className={cn("py-1.5 pl-8 pr-2 text-xs font-semibold text-[var(--text-muted)] tracking-wider uppercase", className)}
+    className={cn(
+      "py-1.5 pl-8 pr-2 text-xs font-semibold text-[var(--text-muted)] tracking-wider uppercase",
+      className
+    )}
     {...props}
   />
 ));

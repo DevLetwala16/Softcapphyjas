@@ -264,8 +264,22 @@ export function CommandPalette({
 
           <div className="flex items-center justify-between px-4 py-2.5 border-t border-[var(--border)] bg-[var(--bg-elev-2)]/50 text-[11px] text-[var(--text-muted)]">
             <div className="flex items-center gap-3">
-              <span>Use <kbd className="font-mono-data px-1 rounded bg-[var(--bg)] border border-[var(--border)]">↑</kbd> <kbd className="font-mono-data px-1 rounded bg-[var(--bg)] border border-[var(--border)]">↓</kbd> to navigate</span>
-              <span><kbd className="font-mono-data px-1 rounded bg-[var(--bg)] border border-[var(--border)]">↵</kbd> to select</span>
+              <span>
+                Use{" "}
+                <kbd className="font-mono-data px-1 rounded bg-[var(--bg)] border border-[var(--border)]">
+                  ↑
+                </kbd>{" "}
+                <kbd className="font-mono-data px-1 rounded bg-[var(--bg)] border border-[var(--border)]">
+                  ↓
+                </kbd>{" "}
+                to navigate
+              </span>
+              <span>
+                <kbd className="font-mono-data px-1 rounded bg-[var(--bg)] border border-[var(--border)]">
+                  ↵
+                </kbd>{" "}
+                to select
+              </span>
             </div>
             <span>Softcapphyjas Navigation</span>
           </div>

@@ -8,7 +8,7 @@
   --bg-elev-1: #0a0e1a;
   --bg-elev-2: #0f1526;
   --border: rgba(255, 255, 255, 0.08);
-  --border-subtle: #26324F;
+  --border-subtle: #26324f;
   --text: #e8ecf5;
   --text-muted: #8c97b2;
   --accent: #22d3ee; /* cyan */
@@ -35,9 +35,11 @@
   --fs-body: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
 
   /* Typography */
-  --font-grotesk: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-grotesk:
+    "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-inter: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-jetbrains: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-jetbrains:
+    "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
 .light {
@@ -92,7 +94,9 @@ body {
   padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  transition: background-color 240ms cubic-bezier(0.2, 0.8, 0.2, 1), color 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition:
+    background-color 240ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    color 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 /* Fluid Layout Engine (Board 05) */

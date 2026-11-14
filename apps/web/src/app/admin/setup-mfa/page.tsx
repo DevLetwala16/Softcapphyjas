@@ -108,7 +108,9 @@ export default function SetupMfaPage() {
       <div className="min-h-screen flex items-center justify-center bg-[var(--bg)] text-white">
         <div className="flex flex-col items-center gap-3">
           <div className="w-8 h-8 border-2 border-[var(--accent)] border-t-transparent rounded-full animate-spin" />
-          <span className="text-xs text-[var(--text-muted)] font-mono">Generating TOTP cryptographic key...</span>
+          <span className="text-xs text-[var(--text-muted)] font-mono">
+            Generating TOTP cryptographic key...
+          </span>
         </div>
       </div>
     );
@@ -119,7 +121,10 @@ export default function SetupMfaPage() {
       <div className="max-w-2xl mx-auto space-y-8">
         {/* Navigation */}
         <div className="flex items-center justify-between">
-          <Link href="/admin" className="text-xs text-[var(--text-muted)] hover:text-white flex items-center gap-1.5">
+          <Link
+            href="/admin"
+            className="text-xs text-[var(--text-muted)] hover:text-white flex items-center gap-1.5"
+          >
             ← Back to Command Center
           </Link>
           <span className="text-xs font-mono text-[var(--accent)]">STAFF SECURITY ENROLLMENT</span>
@@ -132,7 +137,8 @@ export default function SetupMfaPage() {
             Set Up Two-Factor Authentication
           </h1>
           <p className="text-sm text-[var(--text-muted)]">
-            Protect your staff account using time-based one-time passwords (TOTP) compliant with RFC 6238.
+            Protect your staff account using time-based one-time passwords (TOTP) compliant with RFC
+            6238.
           </p>
         </div>
 
@@ -148,7 +154,9 @@ export default function SetupMfaPage() {
         {success && (
           <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm flex items-center gap-3">
             <CheckCircle2 className="w-5 h-5 shrink-0" />
-            <span>Two-factor authentication successfully enabled! Redirecting to Command Center...</span>
+            <span>
+              Two-factor authentication successfully enabled! Redirecting to Command Center...
+            </span>
           </div>
         )}
 
@@ -162,7 +170,8 @@ export default function SetupMfaPage() {
           </div>
 
           <p className="text-xs text-[var(--text-muted)]">
-            Open Google Authenticator, 1Password, Authy, or Apple Keychain and scan the QR code below:
+            Open Google Authenticator, 1Password, Authy, or Apple Keychain and scan the QR code
+            below:
           </p>
 
           <div className="flex flex-col sm:flex-row items-center gap-6 pt-2">
@@ -180,7 +189,9 @@ export default function SetupMfaPage() {
             )}
 
             <div className="space-y-3 w-full">
-              <span className="text-xs text-[var(--text-muted)] block">Or enter this secret key manually:</span>
+              <span className="text-xs text-[var(--text-muted)] block">
+                Or enter this secret key manually:
+              </span>
               <div className="flex items-center gap-2 p-3 bg-[var(--bg)] border border-[var(--border)] rounded-xl font-mono text-sm text-[var(--accent)] break-all select-all">
                 <KeyRound className="w-4 h-4 shrink-0 text-[var(--text-muted)]" />
                 <span className="flex-1">{secret}</span>
@@ -190,7 +201,11 @@ export default function SetupMfaPage() {
                   className="p-1.5 rounded-lg hover:bg-white/10 text-[var(--text-muted)] hover:text-white transition-colors"
                   title="Copy secret"
                 >
-                  {copiedSecret ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
+                  {copiedSecret ? (
+                    <Check className="w-4 h-4 text-emerald-400" />
+                  ) : (
+                    <Copy className="w-4 h-4" />
+                  )}
                 </button>
               </div>
             </div>
@@ -211,18 +226,26 @@ export default function SetupMfaPage() {
               onClick={copyCodes}
               className="text-xs text-[var(--accent)] hover:underline flex items-center gap-1.5"
             >
-              {copiedCodes ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+              {copiedCodes ? (
+                <Check className="w-3.5 h-3.5 text-emerald-400" />
+              ) : (
+                <Copy className="w-3.5 h-3.5" />
+              )}
               {copiedCodes ? "Copied" : "Copy all codes"}
             </button>
           </div>
 
           <p className="text-xs text-[var(--text-muted)]">
-            Store these emergency codes in a secure password manager. Each code can be used once if you lose device access:
+            Store these emergency codes in a secure password manager. Each code can be used once if
+            you lose device access:
           </p>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1 font-mono text-xs">
             {backupCodes.map((code, idx) => (
-              <div key={idx} className="p-2.5 bg-[var(--bg)] border border-[var(--border)] rounded-lg text-center text-white/90">
+              <div
+                key={idx}
+                className="p-2.5 bg-[var(--bg)] border border-[var(--border)] rounded-lg text-center text-white/90"
+              >
                 {code}
               </div>
             ))}
@@ -230,7 +253,10 @@ export default function SetupMfaPage() {
         </div>
 
         {/* Step 3: Verify and Activate */}
-        <form onSubmit={handleVerify} className="bg-[var(--bg-elev-1)] border border-[var(--border)] rounded-2xl p-6 sm:p-8 space-y-5">
+        <form
+          onSubmit={handleVerify}
+          className="bg-[var(--bg-elev-1)] border border-[var(--border)] rounded-2xl p-6 sm:p-8 space-y-5"
+        >
           <div className="flex items-center gap-2.5 text-sm font-semibold text-white">
             <span className="w-6 h-6 rounded-full bg-[var(--accent)] text-[#05070D] flex items-center justify-center text-xs font-bold">
               3

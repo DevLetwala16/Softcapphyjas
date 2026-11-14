@@ -34,12 +34,9 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const errorId = `${inputId}-error`;
     const helperId = `${inputId}-helper`;
 
-    const describedBy = [
-      error ? errorId : null,
-      helperText && !error ? helperId : null,
-    ]
-      .filter(Boolean)
-      .join(" ") || undefined;
+    const describedBy =
+      [error ? errorId : null, helperText && !error ? helperId : null].filter(Boolean).join(" ") ||
+      undefined;
 
     return (
       <div className={cn("w-full flex flex-col gap-1.5 text-left", wrapperClassName)}>
@@ -50,7 +47,11 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           >
             <span>
               {label}
-              {required && <span className="text-[var(--danger)] ml-1" aria-hidden="true">*</span>}
+              {required && (
+                <span className="text-[var(--danger)] ml-1" aria-hidden="true">
+                  *
+                </span>
+              )}
             </span>
           </label>
         )}
@@ -76,8 +77,10 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
               "focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/30 focus:bg-[var(--bg-elev-1)]",
               leftIcon && "pl-11",
               rightIcon || error ? "pr-11" : "pr-4",
-              error && "border-[var(--danger)] focus:border-[var(--danger)] focus:ring-[var(--danger)]/30 text-[var(--text)]",
-              disabled && "opacity-40 cursor-not-allowed bg-[var(--bg-elev-1)] hover:bg-[var(--bg-elev-1)] hover:border-[var(--border)]",
+              error &&
+                "border-[var(--danger)] focus:border-[var(--danger)] focus:ring-[var(--danger)]/30 text-[var(--text)]",
+              disabled &&
+                "opacity-40 cursor-not-allowed bg-[var(--bg-elev-1)] hover:bg-[var(--bg-elev-1)] hover:border-[var(--border)]",
               className
             )}
             {...props}
@@ -97,7 +100,11 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         </div>
 
         {error && (
-          <p id={errorId} className="text-xs text-[var(--danger)] font-medium flex items-center gap-1.5 mt-0.5" role="alert">
+          <p
+            id={errorId}
+            className="text-xs text-[var(--danger)] font-medium flex items-center gap-1.5 mt-0.5"
+            role="alert"
+          >
             <span>{error}</span>
           </p>
         )}

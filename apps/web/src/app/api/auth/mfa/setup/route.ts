@@ -1,7 +1,12 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/auth";
 import { prisma } from "@softcapphyjas/db";
-import { generateMfaSecret, generateMfaQrCode, generateBackupCodes, isStaff } from "@softcapphyjas/auth";
+import {
+  generateMfaSecret,
+  generateMfaQrCode,
+  generateBackupCodes,
+  isStaff,
+} from "@softcapphyjas/auth";
 
 export async function POST() {
   const session = await auth();
@@ -11,7 +16,10 @@ export async function POST() {
 
   // Ensure user is staff
   if (!isStaff(session.user)) {
-    return NextResponse.json({ error: "MFA is only configured for staff accounts" }, { status: 403 });
+    return NextResponse.json(
+      { error: "MFA is only configured for staff accounts" },
+      { status: 403 }
+    );
   }
 
   const user = await prisma.user.findUnique({

@@ -84,11 +84,46 @@ export default function DesignSystemShowcase() {
 
   // Sample sortable table data
   const [tableData, setTableData] = React.useState([
-    { id: "1", name: "Hamiltonian Physics Model v3", domain: "physics", status: "Active", latency: "14ms", accuracy: "99.4%" },
-    { id: "2", name: "Crop Pathology Hyperspectral", domain: "agri", status: "Training", latency: "38ms", accuracy: "96.8%" },
-    { id: "3", name: "Oncology Drug Binding Predictor", domain: "medical", status: "Active", latency: "22ms", accuracy: "98.7%" },
-    { id: "4", name: "Geometric Deep Learning Prover", domain: "math", status: "Testing", latency: "85ms", accuracy: "94.2%" },
-    { id: "5", name: "Synapse Multi-modal Reasoner", domain: "frontier", status: "Active", latency: "19ms", accuracy: "99.8%" },
+    {
+      id: "1",
+      name: "Hamiltonian Physics Model v3",
+      domain: "physics",
+      status: "Active",
+      latency: "14ms",
+      accuracy: "99.4%",
+    },
+    {
+      id: "2",
+      name: "Crop Pathology Hyperspectral",
+      domain: "agri",
+      status: "Training",
+      latency: "38ms",
+      accuracy: "96.8%",
+    },
+    {
+      id: "3",
+      name: "Oncology Drug Binding Predictor",
+      domain: "medical",
+      status: "Active",
+      latency: "22ms",
+      accuracy: "98.7%",
+    },
+    {
+      id: "4",
+      name: "Geometric Deep Learning Prover",
+      domain: "math",
+      status: "Testing",
+      latency: "85ms",
+      accuracy: "94.2%",
+    },
+    {
+      id: "5",
+      name: "Synapse Multi-modal Reasoner",
+      domain: "frontier",
+      status: "Active",
+      latency: "19ms",
+      accuracy: "99.8%",
+    },
   ]);
   const [sortDirection, setSortDirection] = React.useState<"asc" | "desc" | null>(null);
 
@@ -122,8 +157,9 @@ export default function DesignSystemShowcase() {
               Visual Design System & Prototype Architecture
             </h1>
             <p className="text-base text-[var(--text-muted)] leading-relaxed">
-              Academic meets futuristic. Fluid typography, responsive layout engine (375px → 2560px),
-              domain colour taxonomy, full state matrix, accessible keyboard navigation, and micro-interactions.
+              Academic meets futuristic. Fluid typography, responsive layout engine (375px →
+              2560px), domain colour taxonomy, full state matrix, accessible keyboard navigation,
+              and micro-interactions.
             </p>
           </div>
         </Container>
@@ -187,7 +223,9 @@ export default function DesignSystemShowcase() {
             <div className="p-4 rounded-xl border border-[#34D399]/30 bg-[#34D399]/5 text-left">
               <span className="h-3 w-3 rounded-full bg-[#34D399] inline-block mb-2" />
               <div className="font-semibold text-sm text-[#34D399]">Agriculture</div>
-              <div className="text-xs text-[var(--text-muted)]">#34D399 · Hyperspectral Crop AI</div>
+              <div className="text-xs text-[var(--text-muted)]">
+                #34D399 · Hyperspectral Crop AI
+              </div>
             </div>
             <div className="p-4 rounded-xl border border-[#22D3EE]/30 bg-[#22D3EE]/5 text-left">
               <span className="h-3 w-3 rounded-full bg-[#22D3EE] inline-block mb-2" />
@@ -216,7 +254,8 @@ export default function DesignSystemShowcase() {
                 <span>Buttons & Interaction States</span>
               </h2>
               <p className="text-sm text-[var(--text-muted)]">
-                Default, hover (brightness + glow), focus ring (2px cyan), disabled (40%), loading with fixed width.
+                Default, hover (brightness + glow), focus ring (2px cyan), disabled (40%), loading
+                with fixed width.
               </p>
             </div>
 
@@ -292,7 +331,8 @@ export default function DesignSystemShowcase() {
               <span>Cards, Glass & Stat Tickers</span>
             </h2>
             <p className="text-sm text-[var(--text-muted)]">
-              Hairline standard cards, high-fidelity glass cards with 16px blur, and JetBrains Mono metric cards.
+              Hairline standard cards, high-fidelity glass cards with 16px blur, and JetBrains Mono
+              metric cards.
             </p>
           </div>
 
@@ -310,7 +350,8 @@ export default function DesignSystemShowcase() {
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-[var(--text-muted)] leading-relaxed">
-                  Used across all regular dashboard panels, course listings, and research archives. Meets high contrast requirements.
+                  Used across all regular dashboard panels, course listings, and research archives.
+                  Meets high contrast requirements.
                 </p>
               </CardContent>
               <CardFooter className="justify-between text-xs text-[var(--text-muted)]">
@@ -334,7 +375,8 @@ export default function DesignSystemShowcase() {
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-[var(--text-muted)] leading-relaxed">
-                  Maximum 3 glass cards in view rule applied. Accentuates hero teasers, pricing highlights, and floating controls.
+                  Maximum 3 glass cards in view rule applied. Accentuates hero teasers, pricing
+                  highlights, and floating controls.
                 </p>
               </CardContent>
               <CardFooter className="justify-between text-xs text-[var(--text-muted)]">
@@ -356,7 +398,8 @@ export default function DesignSystemShowcase() {
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-[var(--text-muted)] leading-relaxed">
-                  Hover to preview state change. Used for course catalog cards, research paper links, and project configurators.
+                  Hover to preview state change. Used for course catalog cards, research paper
+                  links, and project configurators.
                 </p>
               </CardContent>
               <CardFooter className="text-xs text-[var(--accent)] font-medium">
@@ -478,9 +521,7 @@ export default function DesignSystemShowcase() {
               </div>
 
               <div className="pt-2 border-t border-[var(--border)] space-y-3">
-                <label className="text-xs font-medium text-[var(--text-muted)]">
-                  Radio Group
-                </label>
+                <label className="text-xs font-medium text-[var(--text-muted)]">Radio Group</label>
                 <RadioGroup value={radioVal} onValueChange={setRadioVal}>
                   <RadioGroupItem
                     value="standard"
@@ -516,7 +557,8 @@ export default function DesignSystemShowcase() {
               <div>
                 <h3 className="font-semibold text-base mb-2">Accessible Modal Dialog</h3>
                 <p className="text-xs text-[var(--text-muted)] mb-4 leading-relaxed">
-                  Includes focus trap, backdrop blur, Escape key listener, and keyboard accessible actions.
+                  Includes focus trap, backdrop blur, Escape key listener, and keyboard accessible
+                  actions.
                 </p>
 
                 <Dialog>
@@ -527,7 +569,8 @@ export default function DesignSystemShowcase() {
                     <DialogHeader>
                       <DialogTitle>Confirm Project Specification</DialogTitle>
                       <DialogDescription>
-                        You are initiating an enterprise research engagement for Hamiltonian Dynamics ML.
+                        You are initiating an enterprise research engagement for Hamiltonian
+                        Dynamics ML.
                       </DialogDescription>
                     </DialogHeader>
 
@@ -548,7 +591,9 @@ export default function DesignSystemShowcase() {
                       </DialogClose>
                       <Button
                         variant="primary"
-                        onClick={() => notify.success("Project proposal confirmed and sent to lead architect!")}
+                        onClick={() =>
+                          notify.success("Project proposal confirmed and sent to lead architect!")
+                        }
                       >
                         Confirm & Dispatch
                       </Button>
@@ -563,21 +608,36 @@ export default function DesignSystemShowcase() {
                   <Button
                     variant="secondary"
                     size="sm"
-                    onClick={() => notify.success("Paper bookmarked successfully", "Saved to your research library.")}
+                    onClick={() =>
+                      notify.success(
+                        "Paper bookmarked successfully",
+                        "Saved to your research library."
+                      )
+                    }
                   >
                     Success Toast
                   </Button>
                   <Button
                     variant="secondary"
                     size="sm"
-                    onClick={() => notify.warning("Quota threshold at 85%", "Consider expanding your GPU allocation.")}
+                    onClick={() =>
+                      notify.warning(
+                        "Quota threshold at 85%",
+                        "Consider expanding your GPU allocation."
+                      )
+                    }
                   >
                     Warning Toast
                   </Button>
                   <Button
                     variant="secondary"
                     size="sm"
-                    onClick={() => notify.error("Payment authorization failed", "Please verify your card details.")}
+                    onClick={() =>
+                      notify.error(
+                        "Payment authorization failed",
+                        "Please verify your card details."
+                      )
+                    }
                   >
                     Error Toast
                   </Button>
@@ -608,14 +668,26 @@ export default function DesignSystemShowcase() {
                     <TabsTrigger value="architecture">Architecture</TabsTrigger>
                     <TabsTrigger value="benchmarks">Benchmarks</TabsTrigger>
                   </TabsList>
-                  <TabsContent value="overview" className="p-4 rounded-xl bg-[var(--bg-elev-2)] text-xs leading-relaxed text-[var(--text-muted)]">
-                    Softcapphyjas conducts foundational investigation at the intersection of continuous physical systems and discrete neural networks.
+                  <TabsContent
+                    value="overview"
+                    className="p-4 rounded-xl bg-[var(--bg-elev-2)] text-xs leading-relaxed text-[var(--text-muted)]"
+                  >
+                    Softcapphyjas conducts foundational investigation at the intersection of
+                    continuous physical systems and discrete neural networks.
                   </TabsContent>
-                  <TabsContent value="architecture" className="p-4 rounded-xl bg-[var(--bg-elev-2)] text-xs leading-relaxed text-[var(--text-muted)]">
-                    Heterogeneous compute pipeline utilizing JAX, PyTorch, pgvector embeddings, and custom GPU acceleration kernels.
+                  <TabsContent
+                    value="architecture"
+                    className="p-4 rounded-xl bg-[var(--bg-elev-2)] text-xs leading-relaxed text-[var(--text-muted)]"
+                  >
+                    Heterogeneous compute pipeline utilizing JAX, PyTorch, pgvector embeddings, and
+                    custom GPU acceleration kernels.
                   </TabsContent>
-                  <TabsContent value="benchmarks" className="p-4 rounded-xl bg-[var(--bg-elev-2)] text-xs leading-relaxed text-[var(--text-muted)]">
-                    Achieved 99.4% conservation on energy manifold invariants compared to standard Runge-Kutta numerical integrators.
+                  <TabsContent
+                    value="benchmarks"
+                    className="p-4 rounded-xl bg-[var(--bg-elev-2)] text-xs leading-relaxed text-[var(--text-muted)]"
+                  >
+                    Achieved 99.4% conservation on energy manifold invariants compared to standard
+                    Runge-Kutta numerical integrators.
                   </TabsContent>
                 </Tabs>
               </div>
@@ -624,15 +696,19 @@ export default function DesignSystemShowcase() {
                 <h3 className="font-semibold text-base mb-2">Animated Accordion</h3>
                 <Accordion type="single" collapsible defaultValue="item-1">
                   <AccordionItem value="item-1">
-                    <AccordionTrigger>What guarantees does Synapse offer for research citations?</AccordionTrigger>
+                    <AccordionTrigger>
+                      What guarantees does Synapse offer for research citations?
+                    </AccordionTrigger>
                     <AccordionContent>
-                      Every Synapse synthesis embeds cryptographic trace IDs linked directly to source preprints, peer-reviewed journals, or local enterprise documents.
+                      Every Synapse synthesis embeds cryptographic trace IDs linked directly to
+                      source preprints, peer-reviewed journals, or local enterprise documents.
                     </AccordionContent>
                   </AccordionItem>
                   <AccordionItem value="item-2">
                     <AccordionTrigger>Can client models be deployed on-premise?</AccordionTrigger>
                     <AccordionContent>
-                      Yes. Our Sovereign AI service builds fully isolated, air-gapped model artifacts deployable to Kubernetes or bare-metal GPU clusters.
+                      Yes. Our Sovereign AI service builds fully isolated, air-gapped model
+                      artifacts deployable to Kubernetes or bare-metal GPU clusters.
                     </AccordionContent>
                   </AccordionItem>
                 </Accordion>
@@ -649,7 +725,8 @@ export default function DesignSystemShowcase() {
               <span>Sortable Table & Skeletons</span>
             </h2>
             <p className="text-sm text-[var(--text-muted)]">
-              Keyboard accessible table rows, sorting headers, and shimmer loading placeholders (no spinners alone).
+              Keyboard accessible table rows, sorting headers, and shimmer loading placeholders (no
+              spinners alone).
             </p>
           </div>
 
@@ -711,7 +788,8 @@ export default function DesignSystemShowcase() {
               <span>Global Navigation & Mobile Drawer (Board 04)</span>
             </h2>
             <p className="text-sm text-[var(--text-muted)]">
-              Mega-menu hover intent, command palette, floating Concierge chatbot, cookie banner, and mobile bottom tab bar.
+              Mega-menu hover intent, command palette, floating Concierge chatbot, cookie banner,
+              and mobile bottom tab bar.
             </p>
           </div>
 
@@ -719,7 +797,8 @@ export default function DesignSystemShowcase() {
             <Card variant="standard" padding="lg" className="space-y-4">
               <h3 className="font-semibold text-base">Mobile Portal Bottom Tab Bar</h3>
               <p className="text-xs text-[var(--text-muted)] leading-relaxed">
-                Rendered on mobile screens and authenticated student/client dashboards with active indicator.
+                Rendered on mobile screens and authenticated student/client dashboards with active
+                indicator.
               </p>
               <div className="p-4 rounded-xl bg-[var(--bg)] border border-[var(--border)] overflow-hidden">
                 <BottomTabBar
@@ -746,10 +825,7 @@ export default function DesignSystemShowcase() {
                 >
                   Open Command Palette (⌘K)
                 </Button>
-                <Button
-                  variant="outline"
-                  onClick={() => setShowOfflineBanner(!showOfflineBanner)}
-                >
+                <Button variant="outline" onClick={() => setShowOfflineBanner(!showOfflineBanner)}>
                   {showOfflineBanner ? "Disable Offline Banner" : "Simulate Offline Mode"}
                 </Button>
               </div>
@@ -765,7 +841,8 @@ export default function DesignSystemShowcase() {
               <span>UI State Library & Edge Boundaries (Board 39)</span>
             </h2>
             <p className="text-sm text-[var(--text-muted)]">
-              Standardized states across all widgets: Empty, Error + Retry + Error ID, Permission Denied, Rate-Limit countdown, Form Validation summary.
+              Standardized states across all widgets: Empty, Error + Retry + Error ID, Permission
+              Denied, Rate-Limit countdown, Form Validation summary.
             </p>
           </div>
 

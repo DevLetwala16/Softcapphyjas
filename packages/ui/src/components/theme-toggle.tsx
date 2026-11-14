@@ -11,11 +11,7 @@ export interface ThemeToggleProps {
   className?: string;
 }
 
-export function ThemeToggle({
-  theme,
-  onThemeChange,
-  className,
-}: ThemeToggleProps) {
+export function ThemeToggle({ theme, onThemeChange, className }: ThemeToggleProps) {
   const [mounted, setMounted] = React.useState(false);
   const [currentTheme, setCurrentTheme] = React.useState<"dark" | "light">("dark");
 

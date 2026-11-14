@@ -21,10 +21,7 @@ export async function POST(req: NextRequest) {
   });
 
   if (!user || !user.mfaSecret) {
-    return NextResponse.json(
-      { error: "MFA is not initiated for this account" },
-      { status: 400 }
-    );
+    return NextResponse.json({ error: "MFA is not initiated for this account" }, { status: 400 });
   }
 
   const isValid = verifyMfaToken(token, user.mfaSecret);

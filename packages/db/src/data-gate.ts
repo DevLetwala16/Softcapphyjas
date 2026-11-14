@@ -16,12 +16,19 @@ export const dataGate = {
    * - Students only see published courses
    * - Admins see all
    */
-  scopeCourses(user?: DataGateUser | null, baseWhere?: Prisma.CourseWhereInput): Prisma.CourseWhereInput {
+  scopeCourses(
+    user?: DataGateUser | null,
+    baseWhere?: Prisma.CourseWhereInput
+  ): Prisma.CourseWhereInput {
     if (!user) {
       return { ...baseWhere, status: PublishStatus.PUBLISHED, deletedAt: null };
     }
 
-    if (user.roles.includes(Role.SUPER_ADMIN) || user.roles.includes(Role.ADMIN) || user.roles.includes(Role.CONTENT_EDITOR)) {
+    if (
+      user.roles.includes(Role.SUPER_ADMIN) ||
+      user.roles.includes(Role.ADMIN) ||
+      user.roles.includes(Role.CONTENT_EDITOR)
+    ) {
       return { ...baseWhere, deletedAt: null };
     }
 
@@ -41,8 +48,15 @@ export const dataGate = {
    * - Clients only see projects where clientId === user.id
    * - Sales & Admins see all
    */
-  scopeProjects(user: DataGateUser, baseWhere?: Prisma.ProjectWhereInput): Prisma.ProjectWhereInput {
-    if (user.roles.includes(Role.SUPER_ADMIN) || user.roles.includes(Role.ADMIN) || user.roles.includes(Role.SALES_MANAGER)) {
+  scopeProjects(
+    user: DataGateUser,
+    baseWhere?: Prisma.ProjectWhereInput
+  ): Prisma.ProjectWhereInput {
+    if (
+      user.roles.includes(Role.SUPER_ADMIN) ||
+      user.roles.includes(Role.ADMIN) ||
+      user.roles.includes(Role.SALES_MANAGER)
+    ) {
       return { ...baseWhere, deletedAt: null };
     }
 
@@ -59,8 +73,15 @@ export const dataGate = {
    * - Clients only see invoices for their own projects
    * - Finance & Admins see all
    */
-  scopeInvoices(user: DataGateUser, baseWhere?: Prisma.InvoiceWhereInput): Prisma.InvoiceWhereInput {
-    if (user.roles.includes(Role.SUPER_ADMIN) || user.roles.includes(Role.ADMIN) || user.roles.includes(Role.FINANCE)) {
+  scopeInvoices(
+    user: DataGateUser,
+    baseWhere?: Prisma.InvoiceWhereInput
+  ): Prisma.InvoiceWhereInput {
+    if (
+      user.roles.includes(Role.SUPER_ADMIN) ||
+      user.roles.includes(Role.ADMIN) ||
+      user.roles.includes(Role.FINANCE)
+    ) {
       return { ...baseWhere };
     }
 
@@ -82,7 +103,10 @@ export const dataGate = {
    * - Instructors see enrollments for their own courses
    * - Staff/Admins see all
    */
-  scopeEnrollments(user: DataGateUser, baseWhere?: Prisma.EnrollmentWhereInput): Prisma.EnrollmentWhereInput {
+  scopeEnrollments(
+    user: DataGateUser,
+    baseWhere?: Prisma.EnrollmentWhereInput
+  ): Prisma.EnrollmentWhereInput {
     if (user.roles.includes(Role.SUPER_ADMIN) || user.roles.includes(Role.ADMIN)) {
       return { ...baseWhere };
     }

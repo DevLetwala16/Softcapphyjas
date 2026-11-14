@@ -2,7 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { rateLimiter } from "@/lib/rate-limit";
 
 function getClientIdentifier(req: NextRequest, email?: string): string {
-  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || req.headers.get("x-real-ip") || "127.0.0.1";
+  const ip =
+    req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    req.headers.get("x-real-ip") ||
+    "127.0.0.1";
   return email ? `${ip}:${email.toLowerCase().trim()}` : ip;
 }
 

@@ -7,16 +7,12 @@ export const cardVariants = cva(
   {
     variants: {
       variant: {
-        standard:
-          "bg-[var(--bg-elev-1)] border border-[var(--border)] shadow-xs",
-        elevated:
-          "bg-[var(--bg-elev-2)] border border-[var(--border)] shadow-md",
-        glass:
-          "glass-card shadow-sm hover:border-[var(--accent)]/30",
+        standard: "bg-[var(--bg-elev-1)] border border-[var(--border)] shadow-xs",
+        elevated: "bg-[var(--bg-elev-2)] border border-[var(--border)] shadow-md",
+        glass: "glass-card shadow-sm hover:border-[var(--accent)]/30",
         interactive:
           "bg-[var(--bg-elev-1)] border border-[var(--border)] hover:border-[var(--accent)]/50 hover:bg-[var(--bg-elev-2)] hover:shadow-[0_4px_24px_rgba(34,211,238,0.1)] cursor-pointer active:scale-[0.99]",
-        ghost:
-          "bg-transparent border border-transparent hover:bg-[var(--bg-elev-1)]/50",
+        ghost: "bg-transparent border border-transparent hover:bg-[var(--bg-elev-1)]/50",
       },
       padding: {
         none: "p-0",
@@ -33,30 +29,20 @@ export const cardVariants = cva(
 );
 
 export interface CardProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof cardVariants> {}
+  extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof cardVariants> {}
 
 export const Card = React.forwardRef<HTMLDivElement, CardProps>(
   ({ className, variant, padding, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn(cardVariants({ variant, padding, className }))}
-      {...props}
-    />
+    <div ref={ref} className={cn(cardVariants({ variant, padding, className }))} {...props} />
   )
 );
 Card.displayName = "Card";
 
-export const CardHeader = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("flex flex-col space-y-1.5 pb-4", className)}
-    {...props}
-  />
-));
+export const CardHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn("flex flex-col space-y-1.5 pb-4", className)} {...props} />
+  )
+);
 CardHeader.displayName = "CardHeader";
 
 export const CardTitle = React.forwardRef<
@@ -86,24 +72,20 @@ export const CardDescription = React.forwardRef<
 ));
 CardDescription.displayName = "CardDescription";
 
-export const CardContent = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("pt-0", className)} {...props} />
-));
+export const CardContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => <div ref={ref} className={cn("pt-0", className)} {...props} />
+);
 CardContent.displayName = "CardContent";
 
-export const CardFooter = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("flex items-center pt-4 border-t border-[var(--border)]/60 mt-4", className)}
-    {...props}
-  />
-));
+export const CardFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div
+      ref={ref}
+      className={cn("flex items-center pt-4 border-t border-[var(--border)]/60 mt-4", className)}
+      {...props}
+    />
+  )
+);
 CardFooter.displayName = "CardFooter";
 
 /* Dedicated Stat Card from Board 03 */
@@ -133,7 +115,11 @@ export const StatCard = React.forwardRef<HTMLDivElement, StatCardProps>(
           <span>{label}</span>
           <div className="flex items-center gap-1.5">
             {badge}
-            {icon && <span className="text-[var(--text-muted)] group-hover:text-[var(--accent)] transition-colors">{icon}</span>}
+            {icon && (
+              <span className="text-[var(--text-muted)] group-hover:text-[var(--accent)] transition-colors">
+                {icon}
+              </span>
+            )}
           </div>
         </div>
 
@@ -154,7 +140,8 @@ export const StatCard = React.forwardRef<HTMLDivElement, StatCardProps>(
                     : "text-[var(--danger)] bg-[var(--danger)]/10"
                 )}
               >
-                {trend.isPositive ? "+" : ""}{trend.value}
+                {trend.isPositive ? "+" : ""}
+                {trend.value}
               </span>
             )}
             {subValue && <span>{subValue}</span>}

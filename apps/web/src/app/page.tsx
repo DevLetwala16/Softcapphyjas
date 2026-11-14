@@ -49,12 +49,12 @@ export default function HomePage() {
               Phase 1 Complete · Design System Active
             </div>
 
-            <h1 className="text-display tracking-tight text-[var(--text)]">
-              {APP_CONFIG.name}
-            </h1>
+            <h1 className="text-display tracking-tight text-[var(--text)]">{APP_CONFIG.name}</h1>
 
             <p className="text-body text-[var(--text-muted)] max-w-2xl mx-auto leading-relaxed">
-              {APP_CONFIG.tagline}. Operating at the frontier of AI research across biology, agriculture, physics, and higher mathematics, paired with enterprise AI engineering and the Softcapphyjas Synapse platform.
+              {APP_CONFIG.tagline}. Operating at the frontier of AI research across biology,
+              agriculture, physics, and higher mathematics, paired with enterprise AI engineering
+              and the Softcapphyjas Synapse platform.
             </p>
 
             <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
@@ -81,11 +81,7 @@ export default function HomePage() {
               value="5"
               subValue="Bio, Agri, Physics, Math, Frontier"
             />
-            <StatCard
-              label="Design Tokens"
-              value="42+"
-              subValue="Fluid type, glass, elevations"
-            />
+            <StatCard label="Design Tokens" value="42+" subValue="Fluid type, glass, elevations" />
             <StatCard
               label="Responsive Range"
               value="375 → 2560px"
@@ -104,9 +100,7 @@ export default function HomePage() {
       <Section spacing="lg">
         <Container size="ultra">
           <div className="text-center max-w-2xl mx-auto mb-10">
-            <h2 className="text-h2 mb-2 text-[var(--text)]">
-              Frontier Research Taxonomies
-            </h2>
+            <h2 className="text-h2 mb-2 text-[var(--text)]">Frontier Research Taxonomies</h2>
             <p className="text-sm text-[var(--text-muted)]">
               Colour-coded domains mapped directly to mathematical and natural law investigations.
             </p>

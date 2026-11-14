@@ -39,12 +39,14 @@ export default function ForgotPasswordPage() {
             <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs flex items-center gap-2.5">
               <CheckCircle2 className="w-5 h-5 shrink-0" />
               <span className="text-left">
-                If an account exists for <strong className="text-white font-mono">{email}</strong>, a password reset link has been dispatched with a 30-minute validity window.
+                If an account exists for <strong className="text-white font-mono">{email}</strong>,
+                a password reset link has been dispatched with a 30-minute validity window.
               </span>
             </div>
 
             <p className="text-xs text-[var(--text-muted)] leading-relaxed">
-              For security, reset tokens are single-use. If you don&apos;t see the email, verify your spam folder.
+              For security, reset tokens are single-use. If you don&apos;t see the email, verify
+              your spam folder.
             </p>
 
             <Link

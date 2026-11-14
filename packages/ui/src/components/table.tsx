@@ -2,18 +2,17 @@ import * as React from "react";
 import { ArrowUpDown, ArrowUp, ArrowDown } from "lucide-react";
 import { cn } from "../utils";
 
-export const Table = React.forwardRef<
-  HTMLTableElement,
-  React.HTMLAttributes<HTMLTableElement>
->(({ className, ...props }, ref) => (
-  <div className="relative w-full overflow-auto rounded-xl border border-[var(--border)] bg-[var(--bg-elev-1)]">
-    <table
-      ref={ref}
-      className={cn("w-full caption-bottom text-sm text-left", className)}
-      {...props}
-    />
-  </div>
-));
+export const Table = React.forwardRef<HTMLTableElement, React.HTMLAttributes<HTMLTableElement>>(
+  ({ className, ...props }, ref) => (
+    <div className="relative w-full overflow-auto rounded-xl border border-[var(--border)] bg-[var(--bg-elev-1)]">
+      <table
+        ref={ref}
+        className={cn("w-full caption-bottom text-sm text-left", className)}
+        {...props}
+      />
+    </div>
+  )
+);
 Table.displayName = "Table";
 
 export const TableHeader = React.forwardRef<
@@ -35,11 +34,7 @@ export const TableBody = React.forwardRef<
   HTMLTableSectionElement,
   React.HTMLAttributes<HTMLTableSectionElement>
 >(({ className, ...props }, ref) => (
-  <tbody
-    ref={ref}
-    className={cn("[&_tr:last-child]:border-0", className)}
-    {...props}
-  />
+  <tbody ref={ref} className={cn("[&_tr:last-child]:border-0", className)} {...props} />
 ));
 TableBody.displayName = "TableBody";
 
@@ -74,8 +69,7 @@ export const TableRow = React.forwardRef<
 ));
 TableRow.displayName = "TableRow";
 
-export interface TableHeadProps
-  extends React.ThHTMLAttributes<HTMLTableCellElement> {
+export interface TableHeadProps extends React.ThHTMLAttributes<HTMLTableCellElement> {
   sortable?: boolean;
   sortDirection?: "asc" | "desc" | null;
   onSort?: () => void;

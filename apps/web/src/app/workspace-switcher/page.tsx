@@ -19,7 +19,8 @@ export default function WorkspaceSwitcherPage() {
           </div>
           <h1 className="text-3xl font-bold text-white tracking-tight">Choose your Workspace</h1>
           <p className="text-xs text-[var(--text-muted)] font-mono">
-            {roles.length > 0 ? `Active roles: ${roles.join(", ")} · ` : ""}Select interface to access
+            {roles.length > 0 ? `Active roles: ${roles.join(", ")} · ` : ""}Select interface to
+            access
           </p>
         </div>
 

@@ -184,9 +184,7 @@ export function can(
       }
       if (roles.includes(Role.EMPLOYEE)) {
         // Employees can read their own attendance, reviews and tasks
-        return (
-          action === "read" && (!context?.employeeUserId || context.employeeUserId === userId)
-        );
+        return action === "read" && (!context?.employeeUserId || context.employeeUserId === userId);
       }
       return false;
     }

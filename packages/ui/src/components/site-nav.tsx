@@ -174,21 +174,33 @@ export function SiteNav({ onOpenCommandPalette, className }: SiteNavProps) {
 
                     <div className="col-span-4 pt-4 border-t border-[var(--border)] flex items-center justify-between text-xs text-[var(--text-muted)]">
                       <div className="flex items-center gap-4">
-                        <a href="/research/papers" className="hover:text-[var(--text)] flex items-center gap-1">
+                        <a
+                          href="/research/papers"
+                          className="hover:text-[var(--text)] flex items-center gap-1"
+                        >
                           <FileText className="h-3.5 w-3.5 text-[var(--accent)]" />
                           Featured Papers
                         </a>
-                        <a href="/research/labs" className="hover:text-[var(--text)] flex items-center gap-1">
+                        <a
+                          href="/research/labs"
+                          className="hover:text-[var(--text)] flex items-center gap-1"
+                        >
                           <Atom className="h-3.5 w-3.5 text-[#FBBF24]" />
                           Frontier Labs
                         </a>
-                        <a href="/research/open-source" className="hover:text-[var(--text)] flex items-center gap-1">
+                        <a
+                          href="/research/open-source"
+                          className="hover:text-[var(--text)] flex items-center gap-1"
+                        >
                           <Binary className="h-3.5 w-3.5 text-[#34D399]" />
                           Open Source
                         </a>
                       </div>
 
-                      <a href="/research" className="text-[var(--accent)] font-semibold flex items-center gap-1 hover:underline">
+                      <a
+                        href="/research"
+                        className="text-[var(--accent)] font-semibold flex items-center gap-1 hover:underline"
+                      >
                         <span>All Research Archives</span>
                         <ArrowRight className="h-3 w-3" />
                       </a>
@@ -285,8 +297,13 @@ export function SiteNav({ onOpenCommandPalette, className }: SiteNavProps) {
                     </a>
 
                     <div className="col-span-2 pt-3 border-t border-[var(--border)] flex justify-between items-center text-xs">
-                      <span className="text-[var(--text-muted)]">12 specialized enterprise capabilities</span>
-                      <a href="/services" className="text-[var(--accent)] font-semibold hover:underline">
+                      <span className="text-[var(--text-muted)]">
+                        12 specialized enterprise capabilities
+                      </span>
+                      <a
+                        href="/services"
+                        className="text-[var(--accent)] font-semibold hover:underline"
+                      >
                         View Interactive Matrix →
                       </a>
                     </div>
@@ -381,7 +398,9 @@ export function SiteNav({ onOpenCommandPalette, className }: SiteNavProps) {
                   <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[var(--accent)]/15 text-[var(--accent)]">
                     <Sparkles className="h-4 w-4" />
                   </span>
-                  <span className="font-display font-bold text-base text-[var(--text)]">Softcapphyjas</span>
+                  <span className="font-display font-bold text-base text-[var(--text)]">
+                    Softcapphyjas
+                  </span>
                 </div>
                 <button
                   type="button"
@@ -412,7 +431,10 @@ export function SiteNav({ onOpenCommandPalette, className }: SiteNavProps) {
                       <a href="/research/mathematics" className="block text-xs py-1 text-[#A78BFA]">
                         • Higher Mathematics
                       </a>
-                      <a href="/research" className="block text-xs py-1 text-[var(--accent)] font-semibold">
+                      <a
+                        href="/research"
+                        className="block text-xs py-1 text-[var(--accent)] font-semibold"
+                      >
                         View All Research →
                       </a>
                     </AccordionContent>
@@ -423,16 +445,25 @@ export function SiteNav({ onOpenCommandPalette, className }: SiteNavProps) {
                       Enterprise Services
                     </AccordionTrigger>
                     <AccordionContent className="space-y-2 pl-3">
-                      <a href="/services/agentic-ai" className="block text-xs py-1 text-[var(--text)]">
+                      <a
+                        href="/services/agentic-ai"
+                        className="block text-xs py-1 text-[var(--text)]"
+                      >
                         • Agentic AI Systems
                       </a>
                       <a href="/services/mlops" className="block text-xs py-1 text-[var(--text)]">
                         • Enterprise MLOps
                       </a>
-                      <a href="/services/ai-security" className="block text-xs py-1 text-[var(--text)]">
+                      <a
+                        href="/services/ai-security"
+                        className="block text-xs py-1 text-[var(--text)]"
+                      >
                         • AI Security & Red Teaming
                       </a>
-                      <a href="/services" className="block text-xs py-1 text-[var(--accent)] font-semibold">
+                      <a
+                        href="/services"
+                        className="block text-xs py-1 text-[var(--accent)] font-semibold"
+                      >
                         View All Services →
                       </a>
                     </AccordionContent>
@@ -440,16 +471,28 @@ export function SiteNav({ onOpenCommandPalette, className }: SiteNavProps) {
                 </Accordion>
 
                 <div className="space-y-3 pt-4 border-t border-[var(--border)]">
-                  <a href="/academy" className="block text-sm font-semibold text-[var(--text)] py-1.5">
+                  <a
+                    href="/academy"
+                    className="block text-sm font-semibold text-[var(--text)] py-1.5"
+                  >
                     Softcapphyjas Academy
                   </a>
-                  <a href="/flagship-ai" className="block text-sm font-semibold text-[var(--text)] py-1.5">
+                  <a
+                    href="/flagship-ai"
+                    className="block text-sm font-semibold text-[var(--text)] py-1.5"
+                  >
                     Synapse AI Platform
                   </a>
-                  <a href="/careers" className="block text-sm font-semibold text-[var(--text)] py-1.5">
+                  <a
+                    href="/careers"
+                    className="block text-sm font-semibold text-[var(--text)] py-1.5"
+                  >
                     Careers & Job Board
                   </a>
-                  <a href="/design-system" className="block text-sm font-semibold text-[var(--accent)] py-1.5">
+                  <a
+                    href="/design-system"
+                    className="block text-sm font-semibold text-[var(--accent)] py-1.5"
+                  >
                     Design System Showcase
                   </a>
                 </div>

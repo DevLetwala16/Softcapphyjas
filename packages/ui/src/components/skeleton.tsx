@@ -5,11 +5,7 @@ export interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
   shimmer?: boolean;
 }
 
-export function Skeleton({
-  className,
-  shimmer = true,
-  ...props
-}: SkeletonProps) {
+export function Skeleton({ className, shimmer = true, ...props }: SkeletonProps) {
   return (
     <div
       className={cn(
@@ -23,22 +19,13 @@ export function Skeleton({
   );
 }
 
-export function SkeletonText({
-  lines = 3,
-  className,
-}: {
-  lines?: number;
-  className?: string;
-}) {
+export function SkeletonText({ lines = 3, className }: { lines?: number; className?: string }) {
   return (
     <div className={cn("space-y-2.5 w-full", className)}>
       {Array.from({ length: lines }).map((_, i) => (
         <Skeleton
           key={i}
-          className={cn(
-            "h-4 rounded-md",
-            i === lines - 1 ? "w-3/5" : i === 0 ? "w-full" : "w-4/5"
-          )}
+          className={cn("h-4 rounded-md", i === lines - 1 ? "w-3/5" : i === 0 ? "w-full" : "w-4/5")}
         />
       ))}
     </div>

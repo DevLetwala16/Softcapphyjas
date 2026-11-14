@@ -12,12 +12,7 @@ export interface CookieBannerProps {
   className?: string;
 }
 
-export function CookieBanner({
-  onAccept,
-  onReject,
-  onCustomize,
-  className,
-}: CookieBannerProps) {
+export function CookieBanner({ onAccept, onReject, onCustomize, className }: CookieBannerProps) {
   const [visible, setVisible] = React.useState(false);
 
   React.useEffect(() => {
@@ -74,16 +69,12 @@ export function CookieBanner({
             </button>
           </div>
           <p className="text-xs text-[var(--text-muted)] leading-relaxed mb-4">
-            We use essential cookies to maintain security and telemetry cookies to optimize platform performance. PostHog analytics executes only upon your explicit consent.
+            We use essential cookies to maintain security and telemetry cookies to optimize platform
+            performance. PostHog analytics executes only upon your explicit consent.
           </p>
 
           <div className="flex flex-wrap items-center gap-2">
-            <Button
-              variant="primary"
-              size="sm"
-              onClick={handleAccept}
-              className="h-8 px-3 text-xs"
-            >
+            <Button variant="primary" size="sm" onClick={handleAccept} className="h-8 px-3 text-xs">
               Accept All
             </Button>
             <Button
