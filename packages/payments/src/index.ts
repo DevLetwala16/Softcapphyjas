@@ -16,3 +16,5 @@ export function calculateGst(amountPaise: number): {
 export function isEligibleForEmi(amountPaise: number): boolean {
   return amountPaise >= APP_CONFIG.minEmiAmountPaise;
 }
+
+export * from "./emi";
